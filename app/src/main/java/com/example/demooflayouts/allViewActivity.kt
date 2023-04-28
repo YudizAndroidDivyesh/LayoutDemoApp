@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
@@ -18,7 +23,9 @@ class allViewActivity : AppCompatActivity() {
     lateinit var tv_Name : TextView
     lateinit var btn : Button
     lateinit var checkBox : CheckBox
-
+    lateinit var pgBar : ProgressBar
+    lateinit var rgBtn : RadioGroup
+    lateinit var imgV : ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_view)
@@ -27,7 +34,24 @@ class allViewActivity : AppCompatActivity() {
         tv_Name = findViewById(R.id.nameWrite)
         btn = findViewById(R.id.subBtn)
         checkBox = findViewById(R.id.cb)
+        pgBar = findViewById(R.id.progBarStyle)
+        rgBtn = findViewById(R.id.rg)
+        imgV = findViewById(R.id.imageView)
 
+        var isProgrss = true
+
+
+        rgBtn.setOnCheckedChangeListener{
+
+            group , ischecked -> val radioBtn = findViewById<RadioButton>(ischecked)
+            Toast.makeText(applicationContext, "${radioBtn.text}", Toast.LENGTH_SHORT).show()
+
+            if(radioBtn.text == "Hide"){
+                imgV.visibility = View.GONE
+            }else{
+                imgV.visibility = View.VISIBLE
+            }
+        }
 
 
         btn.setOnClickListener {
@@ -36,6 +60,16 @@ class allViewActivity : AppCompatActivity() {
                 "Not Apply",
                 Toast.LENGTH_SHORT
             ).show()
+
+            if (isProgrss){
+                pgBar.visibility = View.VISIBLE
+                isProgrss = false
+            }else{
+                pgBar.visibility = View.GONE
+                isProgrss = true
+            }
+
+
         }
 
         et_Name.addTextChangedListener(object : TextWatcher{

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DemoOfLayouts</string>
+    <array name="countryName">
+        <item>IND</item>
+        <item>USA</item>
+        <item>UK</item>
+        <item>USE</item>
+    </array>
 </resources>
