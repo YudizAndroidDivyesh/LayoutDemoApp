@@ -6,4 +6,8 @@
         <item>UK</item>
         <item>USE</item>
     </array>
+    <declare-styleable name="CustomComponentsOfBtn">
+        <attr name="cust_txt" format="string" />
+        <attr name="cust_btn" format="string" />
+    </declare-styleable>
 </resources>
