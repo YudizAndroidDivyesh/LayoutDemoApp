@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="customColor">#FFC107</color>
-
+    <color name="colorSecondary">#FEDBD0</color>
+    <color name="snackBarColor">#695657</color>
+    <color name="actionColor">#CEB8B0</color>
 </resources>
