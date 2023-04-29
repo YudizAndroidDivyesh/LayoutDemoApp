@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#A3003549"
     tools:context=".CustomComponents">
 
 
@@ -12,7 +13,8 @@
         android:id="@+id/custView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cust_txt="Click On button"
-        app:cust_btn="Click Here"/>
+        app:cust_txt="Click Here"
+        app:cust_btn="Click On button"
+        android:layout_marginTop="150dp"/>
 
 </LinearLayout>
