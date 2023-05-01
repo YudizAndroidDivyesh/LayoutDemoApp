@@ -29,7 +29,9 @@ class allTaskList : AppCompatActivity() {
         task4.setOnClickListener {
             startActivity(Intent(applicationContext,MetarialUI::class.java))
         }
-        task5.setOnClickListener {  }
+        task5.setOnClickListener {
+            startActivity(Intent(applicationContext,Vector_Shapes_and_Drawable_Selector::class.java))
+        }
 
     }
 }

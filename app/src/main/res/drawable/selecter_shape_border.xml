@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <corners android:radius="10dp" />
+    <stroke android:color="@color/customColor" android:width="2dp" android:dashGap="2dp" android:dashWidth="3dp"/>
+
+<!--    <corners android:bottomRightRadius="500dp" android:bottomLeftRadius="500dp"  android:topLeftRadius="750dp" android:topRightRadius="750dp"  />-->
+<!--    <stroke android:width="4dp" android:color="#11D5C2"/>-->
+<!--    <gradient android:endColor="#3F51B5" />-->
+
+</shape>
