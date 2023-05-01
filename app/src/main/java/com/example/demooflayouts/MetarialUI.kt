@@ -23,6 +23,7 @@ class MetarialUI : AppCompatActivity() {
 
         normalFAB.setOnClickListener {
             Snackbar.make(normalFAB,"Added Successfully",Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(normalFAB,"Added",Snackbar.LENGTH_SHORT).show()
         }
 
         extendFAB.setOnClickListener {
