@@ -10,4 +10,6 @@
         <attr name="cust_txt" format="string" />
         <attr name="cust_btn" format="string" />
     </declare-styleable>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

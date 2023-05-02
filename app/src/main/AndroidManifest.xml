@@ -12,6 +12,9 @@
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
         <activity
+            android:name=".ViewPager_TabLayout"
+            android:exported="false" />
+        <activity
             android:name=".Vector_Shapes_and_Drawable_Selector"
             android:exported="false" />
         <activity

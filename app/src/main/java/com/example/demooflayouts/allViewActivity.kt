@@ -1,5 +1,6 @@
 package com.example.demooflayouts
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -15,6 +16,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.color.DynamicColors
 
 class allViewActivity : AppCompatActivity() {
 
@@ -29,7 +31,7 @@ class allViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_view)
-
+        DynamicColors.applyToActivitiesIfAvailable(applicationContext as Application)
         et_Name = findViewById(R.id.name)
         tv_Name = findViewById(R.id.nameWrite)
         btn = findViewById(R.id.subBtn)

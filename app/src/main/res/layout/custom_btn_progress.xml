@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_height="45dp"
         android:layout_margin="15dp"
         android:textColor="@color/customColor"
-        android:background="@drawable/newshap"
+        android:background="#E91E63"
         app:layout_constraintTop_toBottomOf="@id/tv_msg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

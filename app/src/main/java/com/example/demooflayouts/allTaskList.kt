@@ -16,6 +16,7 @@ class allTaskList : AppCompatActivity() {
         var task3 = findViewById<Button>(R.id.btn_custom)
         var task4 = findViewById<Button>(R.id.Drawables1)
         var task5 = findViewById<Button>(R.id.VSD)
+        var task6 = findViewById<Button>(R.id.tabLayoutViewPage)
 
 
         task1.setOnClickListener {
@@ -32,6 +33,8 @@ class allTaskList : AppCompatActivity() {
         task5.setOnClickListener {
             startActivity(Intent(applicationContext,Vector_Shapes_and_Drawable_Selector::class.java))
         }
-
+        task6.setOnClickListener {
+            startActivity(Intent(applicationContext,ViewPager_TabLayout::class.java))
+        }
     }
 }
