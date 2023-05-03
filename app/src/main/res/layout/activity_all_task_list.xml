@@ -60,6 +60,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/VSD" />
+    <Button
+        android:id="@+id/rvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7. RecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutViewPage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,7 @@ class allTaskList : AppCompatActivity() {
         var task4 = findViewById<Button>(R.id.Drawables1)
         var task5 = findViewById<Button>(R.id.VSD)
         var task6 = findViewById<Button>(R.id.tabLayoutViewPage)
+        var task7 = findViewById<Button>(R.id.rvButton)
 
 
         task1.setOnClickListener {
@@ -35,6 +36,9 @@ class allTaskList : AppCompatActivity() {
         }
         task6.setOnClickListener {
             startActivity(Intent(applicationContext,ViewPager_TabLayout::class.java))
+        }
+        task7.setOnClickListener {
+            startActivity(Intent(applicationContext,RecyclerViewActivity::class.java))
         }
     }
 }
