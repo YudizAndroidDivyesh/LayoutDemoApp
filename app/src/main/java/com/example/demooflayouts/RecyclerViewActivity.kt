@@ -2,6 +2,7 @@ package com.example.demooflayouts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demooflayouts.CustomAdapter.MyUserAdapter
 import com.example.demooflayouts.CustomAdapter.User
@@ -10,18 +11,21 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
     val userdatalist = ArrayList<User>()
+    lateinit var deleteAll : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_view)
 
         recyclerView = findViewById(R.id.rvView)
+        deleteAll = findViewById(R.id.delete_records_btn)
 
         addDataToList()
 
         val myadapter = MyUserAdapter(this,userdatalist)
 
         recyclerView.adapter = myadapter
+
 
     }
 

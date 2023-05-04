@@ -18,6 +18,7 @@ class allTaskList : AppCompatActivity() {
         var task5 = findViewById<Button>(R.id.VSD)
         var task6 = findViewById<Button>(R.id.tabLayoutViewPage)
         var task7 = findViewById<Button>(R.id.rvButton)
+        var task8 = findViewById<Button>(R.id.persmissionBtn)
 
 
         task1.setOnClickListener {
@@ -39,6 +40,9 @@ class allTaskList : AppCompatActivity() {
         }
         task7.setOnClickListener {
             startActivity(Intent(applicationContext,RecyclerViewActivity::class.java))
+        }
+        task8.setOnClickListener {
+            startActivity(Intent(applicationContext,RuntimePermissionStartActivity::class.java))
         }
     }
 }
