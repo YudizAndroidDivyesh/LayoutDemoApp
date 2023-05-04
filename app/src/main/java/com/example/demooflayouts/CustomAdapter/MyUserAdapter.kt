@@ -16,20 +16,22 @@ class MyUserAdapter(val context: Context ,var userList: ArrayList<User>) : Recyc
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_userdata,parent,false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position,userList,holder,context)
         holder.btn_delete.setOnClickListener {
-            userList.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, userList.size)
+            userList.removeAt(position)
         }
+        holder.bind(position,userList)
+
     }
 
     override fun getItemCount() = userList.size
 
 
     class ViewHolder(itemView : View ):RecyclerView.ViewHolder(itemView) {
-        fun bind(position: Int, userList: List<User>, holder: ViewHolder, context: Context) {
+        fun bind(position: Int, userList: List<User>) {
             val user = userList[position]
-            name_tv.text =  "$position  ${user.name}"
+            name_tv.text =  "$position ${userList.size} ${user.name}"
             phone_tv.text = user.phoneNumber.toString()
             mail_tv.text = user.email
 

@@ -60,9 +60,18 @@
             android:layout_height="wrap_content"
             android:background="@drawable/baseline_delete_24"
             android:backgroundTint="#FF0000"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/cb_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/cb_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
