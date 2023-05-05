@@ -20,29 +20,36 @@ class MyUserAdapter(val context: Context ,var userList: ArrayList<User>) : Recyc
             notifyItemRangeChanged(position, userList.size)
             userList.removeAt(position)
         }
+//        holder.bind(position,userList,context,this)
+        val user = userList[position]
 
-        holder.bind(position,userList,context)
-
+        holder.name_tv.text =  "$position ${userList.size} ${user.name}"
+        holder.phone_tv.text = user.phoneNumber.toString()
+        holder.mail_tv.text = user.email
+        holder.checkBox_delete_btn.setOnCheckedChangeListener{ _,isChecked ->
+            userList[position].isCheck = isChecked
+            userList.set(position,User(user.name,user.phoneNumber,user.email,true))
+            //      Toast.makeText(context, "${user.isCheck}", Toast.LENGTH_SHORT).show()
+//                myUserAdapter.notifyItemChanged(position)
+        }
     }
 
     override fun getItemCount() = userList.size
 
 
     class ViewHolder(itemView : View ):RecyclerView.ViewHolder(itemView) {
-        fun bind(position: Int, userList: List<User>,context: Context) {
-            val user = userList[position]
+//        fun bind(
+//            position: Int,
+//            userList: List<User>,
+//            context: Context,
+//            myUserAdapter: MyUserAdapter
+//        ) {
+//
+//        }
 
-            name_tv.text =  "$position ${userList.size} ${user.name}"
-            phone_tv.text = user.phoneNumber.toString()
-            mail_tv.text = user.email
-            checkBox_delete_btn.setOnCheckedChangeListener{ _,isChecked ->
-                Toast.makeText(context, "${userList[position]}", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-     private val name_tv = itemView.findViewById<TextView>(R.id.tv_name)
-     private val phone_tv = itemView.findViewById<TextView>(R.id.tv_phone)
-     private val mail_tv = itemView.findViewById<TextView>(R.id.tv_email)
+      val name_tv = itemView.findViewById<TextView>(R.id.tv_name)
+      val phone_tv = itemView.findViewById<TextView>(R.id.tv_phone)
+      val mail_tv = itemView.findViewById<TextView>(R.id.tv_email)
      val btn_delete = itemView.findViewById<ImageButton>(R.id.delete_Btn)
     val checkBox_delete_btn = itemView.findViewById<CheckBox>(R.id.cb_delete)
 
