@@ -27,10 +27,12 @@ class MyUserAdapter(val context: Context ,var userList: ArrayList<User>) : Recyc
         holder.phone_tv.text = user.phoneNumber.toString()
         holder.mail_tv.text = user.email
         holder.checkBox_delete_btn.setOnCheckedChangeListener{ _,isChecked ->
-            userList[position].isCheck = isChecked
-            userList.set(position,User(user.name,user.phoneNumber,user.email,true))
+            if(!userList[position].isCheck ){
+                userList[position].isCheck = isChecked
+//                userList.set(position,User(user.name,user.phoneNumber,user.email,true))
+                notifyItemChanged(position)
+            }
             //      Toast.makeText(context, "${user.isCheck}", Toast.LENGTH_SHORT).show()
-//                myUserAdapter.notifyItemChanged(position)
         }
     }
 
