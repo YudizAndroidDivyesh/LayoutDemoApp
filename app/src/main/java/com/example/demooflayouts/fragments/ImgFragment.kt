@@ -32,7 +32,7 @@ class ImgFragment : Fragment(),FragmentCommunicater{
         val nextPageBtn  = transaction.findViewById<Button>(R.id.nextFragmentBtn)
         val frgTitle = transaction.findViewById<TextView>(R.id.fragmentTitle)
         nextPageBtn.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.frameLayout,addTextFragment()).commit()
+            activity!!.supportFragmentManager.beginTransaction().replace(R.id.frameLayout,addTextFragment()).addToBackStack(null).commit()
         }
         frgTitle.text = arguments?.getString("message")
 

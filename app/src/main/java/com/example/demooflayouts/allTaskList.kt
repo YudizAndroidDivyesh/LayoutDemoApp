@@ -20,6 +20,7 @@ class allTaskList : AppCompatActivity() {
         var task7 = findViewById<Button>(R.id.rvButton)
         var task8 = findViewById<Button>(R.id.persmissionBtn)
         var task9 = findViewById<Button>(R.id.fragmentBtn)
+        var task10 = findViewById<Button>(R.id.alertDialog)
 
 
         task1.setOnClickListener {
@@ -47,6 +48,9 @@ class allTaskList : AppCompatActivity() {
         }
         task9.setOnClickListener {
             startActivity(Intent(applicationContext,FragmentAndNavigationBar::class.java))
+        }
+        task10.setOnClickListener {
+            startActivity(Intent(applicationContext,AlertDialogWithTimeDatePicker::class.java))
         }
     }
 }

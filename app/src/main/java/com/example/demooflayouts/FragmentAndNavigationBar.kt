@@ -43,7 +43,8 @@ class FragmentAndNavigationBar : AppCompatActivity(),FragmentCommunicater {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.frameLayout,fragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frameLayout,fragment)
+            .commit()
     }
 
     override fun passData(msg: String) {
