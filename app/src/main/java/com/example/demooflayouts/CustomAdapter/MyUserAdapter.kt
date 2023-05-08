@@ -20,20 +20,22 @@ class MyUserAdapter(val context: Context ,var userList: ArrayList<User>) : Recyc
             notifyItemRangeChanged(position, userList.size)
             userList.removeAt(position)
         }
-//        holder.bind(position,userList,context,this)
         val user = userList[position]
+        holder.checkBox_delete_btn.isChecked = user.isCheck
+
+        holder.checkBox_delete_btn.setOnClickListener {
+            userList[position].isCheck = !userList[position].isCheck
+            notifyItemChanged(position)
+        }
 
         holder.name_tv.text =  "$position ${userList.size} ${user.name}"
         holder.phone_tv.text = user.phoneNumber.toString()
         holder.mail_tv.text = user.email
-        holder.checkBox_delete_btn.setOnCheckedChangeListener{ _,isChecked ->
-            if(!userList[position].isCheck ){
-                userList[position].isCheck = isChecked
-//                userList.set(position,User(user.name,user.phoneNumber,user.email,true))
-                notifyItemChanged(position)
-            }
-            //      Toast.makeText(context, "${user.isCheck}", Toast.LENGTH_SHORT).show()
-        }
+//        holder.checkBox_delete_btn.setOnCheckedChangeListener{ _,isChecked ->
+//            userList[position].isCheck = isChecked
+//            notifyItemChanged(position)
+//            //      Toast.makeText(context, "${user.isCheck}", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     override fun getItemCount() = userList.size

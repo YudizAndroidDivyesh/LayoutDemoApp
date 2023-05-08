@@ -14,6 +14,9 @@
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
         <activity
+            android:name=".FragmentAndNavigationBar"
+            android:exported="false" />
+        <activity
             android:name=".FragmentsAndNavigationBar"
             android:exported="false" />
         <activity
@@ -26,7 +29,7 @@
             android:name=".RecyclerViewActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewPager_TabLayout"
+            android:name=".ViewPagerTabLayout"
             android:exported="false" />
         <activity
             android:name=".Vector_Shapes_and_Drawable_Selector"

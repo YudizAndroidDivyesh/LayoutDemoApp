@@ -19,6 +19,7 @@ class allTaskList : AppCompatActivity() {
         var task6 = findViewById<Button>(R.id.tabLayoutViewPage)
         var task7 = findViewById<Button>(R.id.rvButton)
         var task8 = findViewById<Button>(R.id.persmissionBtn)
+        var task9 = findViewById<Button>(R.id.fragmentBtn)
 
 
         task1.setOnClickListener {
@@ -36,13 +37,16 @@ class allTaskList : AppCompatActivity() {
             startActivity(Intent(applicationContext,Vector_Shapes_and_Drawable_Selector::class.java))
         }
         task6.setOnClickListener {
-            startActivity(Intent(applicationContext,ViewPager_TabLayout::class.java))
+            startActivity(Intent(applicationContext,ViewPagerTabLayout::class.java))
         }
         task7.setOnClickListener {
             startActivity(Intent(applicationContext,RecyclerViewActivity::class.java))
         }
         task8.setOnClickListener {
             startActivity(Intent(applicationContext,RuntimePermissionStartActivity::class.java))
+        }
+        task9.setOnClickListener {
+            startActivity(Intent(applicationContext,FragmentAndNavigationBar::class.java))
         }
     }
 }
