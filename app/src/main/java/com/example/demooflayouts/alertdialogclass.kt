@@ -54,9 +54,12 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
                 datePick.datePicker.minDate = System.currentTimeMillis()
                 datePick.show()
             }else{
+                toDate.text.clear()
+                datePick.datePicker.minDate = System.currentTimeMillis()
                 calender.set(yearUser,monthUser,dayUser)
                 datePick.datePicker.minDate = calender.timeInMillis
                 datePick.show()
+
             }
         }
         toDate.setOnClickListener {
@@ -87,13 +90,23 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
         submit.setOnClickListener {
             if(checkValidation(fromDate.text.toString(),toDate.text.toString(),selectDate.text.toString())){
          //       Toast.makeText(context, "$fromDate , $toDate , $selectDate", Toast.LENGTH_SHORT).show()
-             if( submitAlertBox()) {
-                 tvData.text = "FromDate = ${fromDate.text} \n ToDate = ${toDate.text} \n SelectTime = ${selectDate.text}"
-                   dismiss()
-               }else{
-                   dismiss()
-                 alertdialogclass(context,tvData).show()
-               }
+                 val alertBuilder = AlertDialog.Builder(context)
+                 alertBuilder.apply {
+                     setTitle("Are You Sure?")
+                     setPositiveButton("Yes"){
+                             dialogInterface,index -> tvData.text = "FromDate = ${fromDate.text} \n ToDate = ${toDate.text} \n SelectTime = ${selectDate.text}"
+                         dismiss()
+                     }
+                     setNegativeButton("No"){
+                             dialogInterface,index ->
+                         dismiss()
+                         alertdialogclass(context,tvData).show()
+                     }
+                     setCancelable(false)
+                 }
+                 val dialog = alertBuilder.create()
+
+                 dialog.show()
 
             }else{
                 Toast.makeText(context, R.string.checkField, Toast.LENGTH_SHORT).show()
@@ -106,29 +119,6 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
             dismiss()
         }
     }
-
-    private fun submitAlertBox() : Boolean{
-        var msg = false
-        val alertBuilder = AlertDialog.Builder(context)
-        alertBuilder.apply {
-            setTitle("Are You Sure?")
-            setPositiveButton("Yes"){
-                dialogInterface,index -> msg = true
-                dismiss()
-            }
-            setNegativeButton("No"){
-                    dialogInterface,index -> msg = false
-                dismiss()
-            }
-            setCancelable(false)
-            return msg
-        }
-        val dialog = alertBuilder.create()
-
-        dialog.show()
-
-    }
-
     private fun checkValidation(fromDate: String, toDate: String, time: String): Boolean {
                 return !(fromDate.isEmpty() || toDate.isEmpty() || time.isEmpty())
     }
