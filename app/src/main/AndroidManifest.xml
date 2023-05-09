@@ -23,7 +23,7 @@
             android:name=".FragmentsAndNavigationBar"
             android:exported="false" />
         <activity
-            android:name=".nextActivity"
+            android:name=".NextActivity"
             android:exported="false" />
         <activity
             android:name=".RuntimePermissionStartActivity"
@@ -35,10 +35,10 @@
             android:name=".ViewPagerTabLayout"
             android:exported="false" />
         <activity
-            android:name=".Vector_Shapes_and_Drawable_Selector"
+            android:name=".VectorShapesAndDrawableSelector"
             android:exported="false" />
         <activity
-            android:name=".allTaskList"
+            android:name=".AllTaskList"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,10 +53,10 @@
             android:name=".CustomComponents"
             android:exported="false" />
         <activity
-            android:name=".allViewActivity"
+            android:name=".AllViewActivity"
             android:exported="false" />
         <activity
-            android:name=".profileScreen"
+            android:name=".ProfileScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -24,8 +24,6 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
     }
 
     fun addCustomView(context: Context, attrs: AttributeSet?){
-        var isProgress = true
-
         LayoutInflater.from(context).inflate(R.layout.custom_btn_progress,this,true)
         orientation = VERTICAL
 

@@ -20,7 +20,7 @@ class FragmentAndNavigationBar : AppCompatActivity(),FragmentCommunicater {
         val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         navigation.setOnItemSelectedListener {
-            when (it.itemId) {
+               when (it.itemId) {
                 R.id.page_1 -> {
                     loadFragment(ImgFragment())
                     true
@@ -43,12 +43,12 @@ class FragmentAndNavigationBar : AppCompatActivity(),FragmentCommunicater {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.frameLayout,fragment)
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout,fragment)
             .commit()
     }
 
     override fun passData(msg: String) {
-        Toast.makeText(this, "$msg", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
 

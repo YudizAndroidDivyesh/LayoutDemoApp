@@ -12,9 +12,9 @@ import com.example.demooflayouts.CustomAdapter.User
 
 class RecyclerViewActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
+   private lateinit var recyclerView: RecyclerView
     val userdatalist = ArrayList<User>()
-    lateinit var deleteAll: Button
+    private lateinit var deleteAll: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +31,9 @@ class RecyclerViewActivity : AppCompatActivity() {
         recyclerView.adapter = myadapter
         deleteAll.setOnClickListener(object : OnClickListener {
             override fun onClick(p0: View?) {
-                Toast.makeText(this@RecyclerViewActivity, "clcick", Toast.LENGTH_SHORT).show()
-
             val l = userdatalist.filter { it.isCheck }
                 //userdatalist.removeAll(l)
-                var itemIndex  = 0
+                var itemIndex: Int
 //                myadapter.notifyItemRangeChanged(0,userdatalist.filter { it.isCheck }.size)
                 for (i in l){
                     itemIndex  = userdatalist.indexOf(i)

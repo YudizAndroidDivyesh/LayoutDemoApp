@@ -23,4 +23,6 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_runtime_permission_start">RuntimePermissionStartActivity</string>
+    <string name="dialogbox">DialogBox</string>
+    <string name="delete_records">Delete Records</string>
 </resources>

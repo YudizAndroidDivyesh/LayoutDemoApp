@@ -21,7 +21,7 @@
         android:id="@+id/delete_records_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Records"
+        android:text="@string/delete_records"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvView" />

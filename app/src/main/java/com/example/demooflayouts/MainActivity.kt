@@ -7,7 +7,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var profileTv : TextView
+    private lateinit var profileTv : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         profileTv = findViewById(R.id.tvProfile)
 
         profileTv.setOnClickListener {
-            startActivity(Intent(this,profileScreen::class.java))
+            startActivity(Intent(this,ProfileScreen::class.java))
         }
 
 

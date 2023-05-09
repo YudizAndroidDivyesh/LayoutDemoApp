@@ -3,7 +3,7 @@ package com.example.demooflayouts
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class profileScreen : AppCompatActivity() {
+class ProfileScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_screen)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vector_Shapes_and_Drawable_Selector">
+    tools:context=".VectorShapesAndDrawableSelector">
 
 
     <ImageView
@@ -13,10 +13,10 @@
         android:layout_height="125dp"
         android:layout_margin="15dp"
         android:layout_marginTop="184dp"
-        android:background="@drawable/selecter_shape_border"
+        android:background="@drawable/rectangle_shape_border"
         android:padding="5dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/newshap"
+        android:src="@drawable/circle_shape"
         android:text="Shape of Rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,8 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change Color"
-        android:textColor="@color/selector_txtcolor"
-        android:buttonTint="@color/selector_bg"
+        android:textColor="@color/txt_color"
+        android:buttonTint="@color/bg_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView2"/>
@@ -87,8 +87,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Click Here To chanege Button and Text Color"
-        android:textColor="@color/selector_txtcolor"
-        android:backgroundTint="@color/selector_bg"
+        android:textColor="@color/txt_color"
+        android:backgroundTint="@color/bg_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cbcolor"/>

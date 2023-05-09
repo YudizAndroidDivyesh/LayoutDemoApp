@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
@@ -13,7 +12,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.LayoutParams
-import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
