@@ -29,10 +29,11 @@ class ImgFragment : Fragment(),FragmentCommunicater{
         // Inflate the layout for this fragment
         val transaction = inflater.inflate(R.layout.fragment_img, container, false)
         var data = activity as FragmentCommunicater
+
         val nextPageBtn  = transaction.findViewById<Button>(R.id.nextFragmentBtn)
         val frgTitle = transaction.findViewById<TextView>(R.id.fragmentTitle)
         nextPageBtn.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.frameLayout,addTextFragment()).addToBackStack(null).commit()
+            activity!!.supportFragmentManager.beginTransaction().replace(R.id.frameLayout,addTextFragment()).addToBackStack("").commit()
         }
         frgTitle.text = arguments?.getString("message")
 

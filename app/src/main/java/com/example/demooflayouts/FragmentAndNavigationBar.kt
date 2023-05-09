@@ -50,4 +50,6 @@ class FragmentAndNavigationBar : AppCompatActivity(),FragmentCommunicater {
     override fun passData(msg: String) {
         Toast.makeText(this, "$msg", Toast.LENGTH_SHORT).show()
     }
+
+
 }
