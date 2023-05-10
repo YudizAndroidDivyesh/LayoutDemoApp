@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.LayoutParams
 import java.util.Calendar
 
-class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
+class alertdialogclass(context: Context,onSelect : (date : String) -> Unit) : Dialog(context) {
     val calender = Calendar.getInstance()
     var date1 = ""
     var date2 = ""
@@ -26,7 +26,7 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
         setContentView(R.layout.custom_dialog)
         window?.let {
             it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            it.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
+            it.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         }
         val fromDate = findViewById<EditText>(R.id.fromDate_et)
         val toDate = findViewById<EditText>(R.id.toDate_et)
@@ -35,7 +35,7 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
 
 
 
-        fromDate.setOnClickListener{
+        fromDate.setOnClickListener {
             val datePick = DatePickerDialog(
                 context,
                 { _, year, month, dayOfMonth ->
@@ -50,13 +50,13 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
                 calender.get(Calendar.DAY_OF_MONTH)
             )
 
-            if(toDate.text.isEmpty()){
+            if (toDate.text.isEmpty()) {
                 datePick.datePicker.minDate = System.currentTimeMillis()
                 datePick.show()
-            }else{
+            } else {
                 toDate.text.clear()
                 datePick.datePicker.minDate = System.currentTimeMillis()
-                calender.set(yearUser,monthUser,dayUser)
+                calender.set(yearUser, monthUser, dayUser)
                 datePick.datePicker.minDate = calender.timeInMillis
                 datePick.show()
 
@@ -70,45 +70,54 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
                     toDate.setText("$year/$month/$dayOfMonth")
                     date2 = "$year/ $month/ $dayOfMonth"
                 },
-                yearUser ,
-               monthUser ,
-               dayUser
+                yearUser,
+                monthUser,
+                dayUser
             )
-            calender.set(yearUser,monthUser,dayUser)
+            calender.set(yearUser, monthUser, dayUser)
             datePick.datePicker.minDate = calender.timeInMillis
             datePick.show()
         }
 
         selectDate.setOnClickListener {
-            val timePick = TimePickerDialog(context,TimePickerDialog.OnTimeSetListener{
-                    _,hourOfDay,minute -> selectDate.setText("$hourOfDay : $minute")
-            },12,0,true)
+            val timePick = TimePickerDialog(
+                context,
+                { _, hourOfDay, minute ->
+                    selectDate.setText("$hourOfDay : $minute")
+                },
+                12,
+                0,
+                true
+            )
             timePick.show()
         }
 
         val submit = findViewById<Button>(R.id.submit_btn)
         submit.setOnClickListener {
-            if(checkValidation(fromDate.text.toString(),toDate.text.toString(),selectDate.text.toString())){
-         //       Toast.makeText(context, "$fromDate , $toDate , $selectDate", Toast.LENGTH_SHORT).show()
-                 val alertBuilder = AlertDialog.Builder(context)
-                 alertBuilder.apply {
-                     setTitle("Are You Sure?")
-                     setPositiveButton("Yes"){
-                             dialogInterface,index -> tvData.text = "FromDate = ${fromDate.text} \n ToDate = ${toDate.text} \n SelectTime = ${selectDate.text}"
-                         dismiss()
-                     }
-                     setNegativeButton("No"){
-                             dialogInterface,index ->
-                         dismiss()
-                         alertdialogclass(context,tvData).show()
-                     }
-                     setCancelable(false)
-                 }
-                 val dialog = alertBuilder.create()
+            if (checkValidation(
+                    fromDate.text.toString(),
+                    toDate.text.toString(),
+                    selectDate.text.toString()
+                )
+            ) {
+                //       Toast.makeText(context, "$fromDate , $toDate , $selectDate", Toast.LENGTH_SHORT).show()
+                val alertBuilder = AlertDialog.Builder(context)
+                val dialog = alertBuilder.create()
+                alertBuilder.apply {
+                    setTitle("Are You Sure?")
+                    setPositiveButton("Yes") { _, _ ->
+                        onSelect.invoke("FromDate = ${fromDate.text} \n ToDate = ${toDate.text} \n SelectTime = ${selectDate.text}")
+                        dialog.dismiss()
+                        dismiss()
+                    }
+                    setNegativeButton("No") { dialogInterface, index ->
+                        dialog.dismiss()
+//                        alertdialogclass(context, tvData).show()
+                    }
+                    setCancelable(false)
+                }.show()
 
-                 dialog.show()
-
-            }else{
+            } else {
                 Toast.makeText(context, R.string.checkField, Toast.LENGTH_SHORT).show()
             }
 
@@ -119,8 +128,9 @@ class alertdialogclass(context: Context, tvData: TextView) : Dialog(context) {
             dismiss()
         }
     }
+
     private fun checkValidation(fromDate: String, toDate: String, time: String): Boolean {
-                return !(fromDate.isEmpty() || toDate.isEmpty() || time.isEmpty())
+        return !(fromDate.isEmpty() || toDate.isEmpty() || time.isEmpty())
     }
 
 

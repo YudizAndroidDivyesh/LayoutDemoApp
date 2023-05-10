@@ -13,7 +13,9 @@ class AlertDialogWithTimeDatePicker : AppCompatActivity() {
         val tvData = findViewById<TextView>(R.id.tv_data)
         val alrt_btn = findViewById<Button>(R.id.DialogBox)
         alrt_btn.setOnClickListener {
-            alertdialogclass(this,tvData).show()
+            alertdialogclass(this){
+                tvData.text = it
+            }.show()
 
         }
 

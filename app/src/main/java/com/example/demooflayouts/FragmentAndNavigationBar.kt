@@ -51,5 +51,11 @@ class FragmentAndNavigationBar : AppCompatActivity(),FragmentCommunicater {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
+//    override fun onBackPressed() {
+//        if(supportFragmentManager.backStackEntryCount > 0){
+//            finish()
+//        }
+//    }
+
 
 }
