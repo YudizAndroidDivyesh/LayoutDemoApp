@@ -21,6 +21,7 @@ class AllTaskList : AppCompatActivity() {
         val task8 = findViewById<Button>(R.id.persmissionBtn)
         val task9 = findViewById<Button>(R.id.fragmentBtn)
         val task10 = findViewById<Button>(R.id.alertDialog)
+        val task11 = findViewById<Button>(R.id.noifye)
 
 
         task1.setOnClickListener {
@@ -51,6 +52,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task10.setOnClickListener {
             startActivity(Intent(applicationContext,AlertDialogWithTimeDatePicker::class.java))
+        }
+        task11.setOnClickListener {
+            startActivity(Intent(applicationContext,AllNotification::class.java))
         }
     }
 }
