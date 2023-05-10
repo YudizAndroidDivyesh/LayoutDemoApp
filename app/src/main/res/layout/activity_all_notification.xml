@@ -42,9 +42,29 @@
         android:id="@+id/notifyTap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add action buttons"
+        android:text="Expandable Notify"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notifyBtn" />
+
+    <Button
+        android:id="@+id/fsn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full screen notification"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notifyTap" />
+
+    <Button
+        android:id="@+id/fcn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fully custom notification"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fsn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
