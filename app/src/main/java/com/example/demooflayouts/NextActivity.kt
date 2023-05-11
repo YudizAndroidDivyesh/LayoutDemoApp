@@ -7,9 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 
 class NextActivity : AppCompatActivity() {
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_next)
@@ -19,11 +16,9 @@ class NextActivity : AppCompatActivity() {
 
         back_btn.setOnClickListener {
             val intent = Intent()
-            intent.putExtra("str",name_et.text.toString())
-            setResult(0,intent)
+            intent.putExtra("str", name_et.text.toString())
+            setResult(0, intent)
             finish()
         }
-
-
     }
 }

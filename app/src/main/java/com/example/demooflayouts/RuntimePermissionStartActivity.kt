@@ -18,6 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.app.ActivityCompat
 
 class RuntimePermissionStartActivity : AppCompatActivity() {
 
@@ -33,6 +34,8 @@ class RuntimePermissionStartActivity : AppCompatActivity() {
             Toast.makeText(this, "Img", Toast.LENGTH_SHORT).show()
         }
     }
+
+    var count = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,7 @@ class RuntimePermissionStartActivity : AppCompatActivity() {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
                 val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
                 requestPermissions(permissions,2)
+
             }else{
                 pickImageFromGallery()
             }
@@ -73,26 +77,31 @@ class RuntimePermissionStartActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             pickImageFromGallery()
         }else{
-            val alertDialog = AlertDialog.Builder(this)
-                val dialog = alertDialog.create()
-                alertDialog.apply {
-                    setTitle("Permission Denied")
-                    setMessage("You have to give permission")
-                    setPositiveButton("Ok"){
-                            _,_ ->  val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri = Uri.fromParts("package",packageName,null)
-                        intent.data = uri
-                        startActivity(intent)
-                    }
-                    setNegativeButton("Cancel"){
-                            _,_ -> dialog.dismiss()
-                    }
-                }.show()
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+
+            if(count > 2){
+                               val alertDialog = AlertDialog.Builder(this)
+               val dialog = alertDialog.create()
+               alertDialog.apply {
+                   setTitle("Permission Denied")
+                   setMessage("You have to give permission")
+                   setPositiveButton("Ok"){
+                           _,_ ->  val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                       val uri = Uri.fromParts("package",packageName,null)
+                       intent.data = uri
+                       startActivity(intent)
+                   }
+                   setNegativeButton("Cancel"){
+                           _,_ -> dialog.dismiss()
+                   }
+               }.show()
+            }
+            count++
+
+
         }
     }
 }

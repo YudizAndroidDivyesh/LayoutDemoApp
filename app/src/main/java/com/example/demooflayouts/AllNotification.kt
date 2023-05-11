@@ -22,6 +22,7 @@ import androidx.core.app.NotificationManagerCompat
 //4) Channels
 
 const val CHANNEL_ID = "channelId"
+const val CHANNEL_ID_one = "channelId_One"
 class AllNotification : AppCompatActivity() {
 
     private lateinit var builder : NotificationCompat.Builder
@@ -60,22 +61,24 @@ class AllNotification : AppCompatActivity() {
                 priority = NotificationCompat.PRIORITY_DEFAULT
             }
             with(NotificationManagerCompat.from(this)){
-                notify(1,builder.build())
+                notify(2,builder.build())
             }
 
         }
 
         findViewById<Button>(R.id.notifyBtn).setOnClickListener {
+            createNotificationChannel()
             val intent = Intent(this,RuntimePermissionStartActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
             val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
             val newIntent = Intent(this,AllTaskList::class.java).apply {
-                action = Intent.ACTION_DEFAULT
+                action = Intent.ACTION_ANSWER
                 putExtra("msg",0)
             }
+            // Perform the backGround app task like pause the music from notification without open MusicApp
             val pendingIntentBroadCast = PendingIntent.getBroadcast(this,0,newIntent,PendingIntent.FLAG_IMMUTABLE)
-            createNotificationChannel()
+
             builder = NotificationCompat.Builder(this, CHANNEL_ID)
             builder.apply {
                 setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -87,12 +90,13 @@ class AllNotification : AppCompatActivity() {
                 setAutoCancel(true)
             }
             with(NotificationManagerCompat.from(this)){
-                notify(1,builder.build())
+                notify(3,builder.build())
             }
         }
         findViewById<Button>(R.id.notifyTap).setOnClickListener {
-            createNotificationChannelImg()
+
             builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            createNotificationChannelImg()
                 builder.apply {
                     setSmallIcon(R.drawable.shape_half_up)
                     setContentTitle("BMW Car")
@@ -104,20 +108,21 @@ class AllNotification : AppCompatActivity() {
 
                 }
             with(NotificationManagerCompat.from(this)){
-                notify(1,builder.build())
+                notify(4,builder.build())
             }
         }
 
         findViewById<Button>(R.id.fsn).setOnClickListener {
+
+            createNotificationChannelImg()
             val fullScreenIntent = Intent(this, MetarialUI::class.java)
             val fullScreenPendingIntent = PendingIntent.getActivity(
                 this,
-                0,
+                5,
                 fullScreenIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_IMMUTABLE
             )
-            createNotificationChannelImg()
-            builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            builder = NotificationCompat.Builder(this, CHANNEL_ID_one)
             builder.apply {
                 setSmallIcon(R.drawable.shape_half_up)
                 setContentTitle("Incoming Call")
@@ -127,14 +132,26 @@ class AllNotification : AppCompatActivity() {
                 setFullScreenIntent(fullScreenPendingIntent, true)
             }
             with(NotificationManagerCompat.from(this)) {
-                notify(1, builder.build())
+                notify(5, builder.build())
             }
         }
 
         findViewById<Button>(R.id.fcn).setOnClickListener {
-//            val notificationLayout = RemoteViews(applicationContext,R.layout.rv_userdata)
-//            val notificationExpanded = RemoteViews(this,R.layout.custom_dialog)
-//
+            createNotificationChannelImg()
+            val notificationLayout = RemoteViews(packageName,R.layout.custme_notification_layout)
+            val notificationExpanded = RemoteViews(packageName,R.layout.custom_expanded_notifiction)
+            builder = NotificationCompat.Builder(this, CHANNEL_ID_one)
+            builder.apply {
+                setSmallIcon(R.drawable.shape_half_up)
+                setContentTitle("Fully custom Notification")
+                setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                setCustomContentView(notificationLayout)
+                setCustomBigContentView(notificationExpanded)
+            }
+            with(NotificationManagerCompat.from(this)) {
+                notify(6, builder.build())
+            }
+
         }
 
     }
@@ -149,7 +166,7 @@ class AllNotification : AppCompatActivity() {
     }
     private fun createNotificationChannelImg() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel = NotificationChannel(CHANNEL_ID,"Second Channel",NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(CHANNEL_ID_one,"Second Channel",NotificationManager.IMPORTANCE_HIGH)
             channel.description = "This description of Notification Img"
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)

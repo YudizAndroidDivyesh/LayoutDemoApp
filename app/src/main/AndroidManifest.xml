@@ -16,6 +16,20 @@
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
         <activity
+            android:name=".AllLayouts.FrameLayoutActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".AllLayouts.ContrainsLayoutActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AllLayouts.RelativeLayputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllLayouts.LinearLayoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".AllNotification"
             android:exported="false" />
         <activity

@@ -26,12 +26,13 @@
     <LinearLayout
         android:id="@+id/form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button"
-        android:layout_alignParentEnd="true"
+        android:layout_height="204dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="-1dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="304dp"
         android:orientation="vertical">
 
 
@@ -71,14 +72,44 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/llact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="119dp"
-        android:text="Submit" />
+        android:layout_marginEnd="228dp"
+        android:layout_marginBottom="219dp"
+        android:text="LinearLayout" />
+
+    <Button
+        android:id="@+id/rlact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="199dp"
+        android:layout_marginBottom="162dp"
+        android:text="RelativeLayout" />
+
+    <Button
+        android:id="@+id/csAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="164dp"
+        android:text="Constrains" />
+
+    <Button
+        android:id="@+id/FrameAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="220dp"
+        android:text="FrameLayout" />
 
     <TextView
         android:id="@+id/tvProfile"
