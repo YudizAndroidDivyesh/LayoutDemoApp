@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_neutral10"
+    tools:context=".AllLayouts.FrameLayoutActivity">
+
+
+    <Button
+        android:layout_width="380dp"
+        android:layout_height="570dp"
+        android:layout_gravity="right|bottom"
+        android:backgroundTint="@color/material_dynamic_tertiary80"/>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:layout_gravity="right|bottom"
+        android:backgroundTint="@color/material_dynamic_tertiary40"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:layout_gravity="right|bottom"
+        android:backgroundTint="@color/material_dynamic_tertiary50"/>
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_gravity="right|bottom"
+        android:backgroundTint="@color/material_dynamic_tertiary95"/>
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="right|bottom"
+        android:backgroundTint="@color/material_dynamic_tertiary90"/>
+</FrameLayout>

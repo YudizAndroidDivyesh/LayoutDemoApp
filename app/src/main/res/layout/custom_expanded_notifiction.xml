@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_neutral60"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/tv_name_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_email"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="37dp"
+        android:layout_toStartOf="@+id/tv_phone_notify"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/tv_phone_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="627dp"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="@tools:sample/us_phones" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="546dp"
+        android:layout_toStartOf="@+id/delete_Btn"
+        android:padding="5dp"
+        android:textColor="#7E0424D5"
+        android:textSize="15sp"
+        android:text="abc@yudiz.com" />
+
+    <ImageButton
+        android:id="@+id/delete_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="592dp"
+        android:background="@drawable/baseline_delete_24"
+        android:backgroundTint="#FF0000" />
+</RelativeLayout>
