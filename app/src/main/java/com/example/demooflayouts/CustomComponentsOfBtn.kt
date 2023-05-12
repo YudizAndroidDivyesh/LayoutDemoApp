@@ -14,12 +14,16 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
 
 
     lateinit var tv_Title : TextView
-    lateinit var Btn_txt : TextView
+    private lateinit var Btn_txt : TextView
     lateinit var frameLayoutBtn : FrameLayout
     lateinit var progressBar  : ProgressBar
 
     init {
         addCustomView(context, attrs)
+
+    }
+
+    fun btnMsg(){
 
     }
 
