@@ -22,6 +22,7 @@ class AllTaskList : AppCompatActivity() {
         val task9 = findViewById<Button>(R.id.fragmentBtn)
         val task10 = findViewById<Button>(R.id.alertDialog)
         val task11 = findViewById<Button>(R.id.noifye)
+        val task12 = findViewById<Button>(R.id.intentAction)
 
 
         task1.setOnClickListener {
@@ -55,6 +56,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task11.setOnClickListener {
             startActivity(Intent(applicationContext,AllNotification::class.java))
+        }
+        task12.setOnClickListener {
+            startActivity(Intent(applicationContext,IntentFilterActionActivity::class.java))
         }
     }
 }

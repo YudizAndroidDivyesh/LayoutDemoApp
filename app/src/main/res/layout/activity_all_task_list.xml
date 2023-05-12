@@ -100,6 +100,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/alertDialog" />
+    <Button
+        android:id="@+id/intentAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12.Intent Action Filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noifye" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,10 +16,17 @@
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
         <activity
-            android:name=".AllLayouts.FrameLayoutActivity"
-            android:exported="true" >
-
+            android:name=".IntentFilterActionActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*"/>
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".AllLayouts.FrameLayoutActivity"
+            android:exported="true" />
         <activity
             android:name=".AllLayouts.ContrainsLayoutActivity"
             android:exported="true" />
