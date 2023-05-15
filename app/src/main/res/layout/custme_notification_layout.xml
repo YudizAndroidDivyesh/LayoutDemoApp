@@ -6,12 +6,13 @@
 
 
     <TextView
+        android:id="@+id/showPercentage_notify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/batteryPercentage"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textStyle="bold|italic"
         android:layout_centerInParent="true"
-        android:drawableStart="@drawable/baseline_battery_charging_full_24"/>
+        android:drawableStart="@drawable/baseline_battery_charging_full_24"
+        android:text="@string/batteryPercentage"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
 </RelativeLayout>

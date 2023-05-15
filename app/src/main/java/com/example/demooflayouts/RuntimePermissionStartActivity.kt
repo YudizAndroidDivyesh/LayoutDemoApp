@@ -81,7 +81,6 @@ class RuntimePermissionStartActivity : AppCompatActivity() {
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             pickImageFromGallery()
         }else{
-
             if(count > 2){
                                val alertDialog = AlertDialog.Builder(this)
                val dialog = alertDialog.create()
