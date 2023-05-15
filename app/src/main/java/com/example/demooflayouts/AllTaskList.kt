@@ -1,9 +1,11 @@
 package com.example.demooflayouts
 
+import android.content.BroadcastReceiver
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
 
 class AllTaskList : AppCompatActivity() {
 
@@ -23,6 +25,7 @@ class AllTaskList : AppCompatActivity() {
         val task10 = findViewById<Button>(R.id.alertDialog)
         val task11 = findViewById<Button>(R.id.noifye)
         val task12 = findViewById<Button>(R.id.intentAction)
+        val task13 = findViewById<Button>(R.id.broadCast)
 
 
         task1.setOnClickListener {
@@ -59,6 +62,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task12.setOnClickListener {
             startActivity(Intent(applicationContext,IntentFilterActionActivity::class.java))
+        }
+        task13.setOnClickListener {
+            startActivity(Intent(applicationContext,BroadCastPercentageActivity::class.java))
         }
     }
 }

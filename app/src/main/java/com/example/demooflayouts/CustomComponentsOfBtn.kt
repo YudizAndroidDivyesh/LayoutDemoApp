@@ -5,12 +5,13 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 
-class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayout(context,attrs){
+class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : FrameLayout(context,attrs){
 
 
     lateinit var tv_Title : TextView
@@ -23,14 +24,8 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
 
     }
 
-    fun btnMsg(){
-
-    }
-
     fun addCustomView(context: Context, attrs: AttributeSet?){
         LayoutInflater.from(context).inflate(R.layout.custom_btn_progress,this,true)
-        orientation = VERTICAL
-
         frameLayoutBtn = findViewById(R.id.frameBtn)
         tv_Title = findViewById(R.id.tv_msg)
         Btn_txt = findViewById(R.id.progressBtn)
@@ -46,6 +41,11 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
             tv_Title.text = titleText
             Btn_txt.text = txtBtn
         }
+
+       fun setButtonAndText(){
+
+        }
+
         frameLayoutBtn.setOnClickListener {
 //                if(isProgress){
 //                    Btn_txt.visibility = View.GONE
@@ -67,3 +67,4 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
         }
     }
 }
+
