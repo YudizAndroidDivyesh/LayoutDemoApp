@@ -6,117 +6,102 @@
     android:layout_height="match_parent"
     tools:context=".AllTaskList">
 
-    <Button
-        android:id="@+id/layout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="1. Layouts"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/view1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2. View"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout1"/>
 
-    <Button
-        android:id="@+id/Drawables1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="3. Drawables"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view1"/>
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_custom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4. Custom Controls"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Drawables1"/>
+        <Button
+            android:id="@+id/layout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="1. Layouts"
+            />
+        <Button
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. View" />
+        <Button
+            android:id="@+id/Drawables1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Drawables"/>
 
-    <Button
-        android:id="@+id/VSD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5. Vector, Shapes and Drawable Selector"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_custom" />
+        <Button
+            android:id="@+id/btn_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4. Custom Controls" />
 
-    <Button
-        android:id="@+id/tabLayoutViewPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="6. View Pager and TabLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/VSD" />
-    <Button
-        android:id="@+id/rvButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="7. RecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayoutViewPage" />
- <Button
-        android:id="@+id/persmissionBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8.Runtime Permission And Start Activity Restart Activity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvButton" />
-    <Button
-        android:id="@+id/fragmentBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="9.Fragment And Bottom Navigation Bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/persmissionBtn" />
- <Button
-        android:id="@+id/alertDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10.Dialog and Date , Time Picker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragmentBtn" />
-    <Button
-        android:id="@+id/noifye"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="11.Notification"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alertDialog" />
-    <Button
-        android:id="@+id/intentAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12.Intent Action Filter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noifye" />
+        <Button
+            android:id="@+id/VSD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. Vector, Shapes and Drawable Selector" />
 
-    <Button
-        android:id="@+id/broadCast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="13.BroadCast Receiver"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/intentAction" />
+        <Button
+            android:id="@+id/tabLayoutViewPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6. View Pager and TabLayout"/>
 
+        <Button
+            android:id="@+id/rvButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7. RecyclerView" />
+
+        <Button
+            android:id="@+id/persmissionBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8.Runtime Permission And Start Activity Restart Activity"/>
+
+        <Button
+            android:id="@+id/fragmentBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9.Fragment And Bottom Navigation Bar"/>
+
+        <Button
+            android:id="@+id/alertDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10.Dialog and Date , Time Picker" />
+        <Button
+            android:id="@+id/noifye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11.Notification" />
+        <Button
+            android:id="@+id/intentAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12.Intent Action Filter" />
+        <Button
+            android:id="@+id/broadCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13.BroadCast Receiver" />
+
+        <Button
+            android:id="@+id/workManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14.FileDownLoad With file manager" />
+
+    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

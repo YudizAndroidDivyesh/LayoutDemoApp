@@ -5,12 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.widget.TextView
 
-class BroadCastReceiverClass(tv: TextView) : BroadcastReceiver() {
-    private val tv : TextView = tv
+class BroadCastReceiverClass(private var data: TextView) : BroadcastReceiver(){
+
     override fun onReceive(context: Context?, intent: Intent?) {
-        val percentage = intent?.getIntExtra("level",0)
-        if (percentage != 0) {
-            tv.text = "Your Battery Percentage Is $percentage%"
-        }
+        val percentageData = intent?.getIntExtra("level",0)
+        data.text = percentageData.toString()
     }
 }

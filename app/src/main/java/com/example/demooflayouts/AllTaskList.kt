@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
+import com.example.demooflayouts.workManager.DownloadFileActivity
 
 class AllTaskList : AppCompatActivity() {
 
@@ -26,6 +27,7 @@ class AllTaskList : AppCompatActivity() {
         val task11 = findViewById<Button>(R.id.noifye)
         val task12 = findViewById<Button>(R.id.intentAction)
         val task13 = findViewById<Button>(R.id.broadCast)
+        val task14 = findViewById<Button>(R.id.workManager)
 
 
         task1.setOnClickListener {
@@ -65,6 +67,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task13.setOnClickListener {
             startActivity(Intent(applicationContext,BroadCastPercentageActivity::class.java))
+        }
+        task14.setOnClickListener {
+            startActivity(Intent(applicationContext,DownloadFileActivity::class.java))
         }
     }
 }
