@@ -130,22 +130,21 @@ class SaveFileActivity : AppCompatActivity() {
         val fileName = "${System.currentTimeMillis()}.jpg"
         var fos : OutputStream? = null
        var imgUri : Uri? = null
+
+        val contentResolver = contentResolver
+        val contentValue = ContentValues()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            val contentResolver = getContentResolver()
-            val contentValue = ContentValues()
             contentValue.apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME,fileName)
                 put(MediaStore.MediaColumns.MIME_TYPE,"image/*")
                 put(MediaStore.MediaColumns.RELATIVE_PATH,Environment.DIRECTORY_PICTURES)
             }
-          imgUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValue)
+            imgUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValue)
             fos = imgUri?.let { contentResolver.openOutputStream(it) }
         }else {
             // These for devices running on android < Q
-            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            val image = File(imagesDir, fileName)
-            Log.d("Path",imagesDir.toString())
-            fos = FileOutputStream(image)
+            imgUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValue)
+            fos = imgUri?.let { contentResolver.openOutputStream(it) }
         }
         fos?.use {
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,it)

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.Key.PROGRESS
 import androidx.work.*
 import com.example.demooflayouts.R
 
@@ -25,7 +26,7 @@ class DownloadFileActivity : AppCompatActivity() {
 
         val progressBar = findViewById<ProgressBar>(R.id.ImgProgressBar)
          val progressBarTv = findViewById<TextView>(R.id.progressTv)
-        val i = 0
+        var i = 0
         val handler = Handler()
         findViewById<Button>(R.id.cancelBtn).setOnClickListener {
             mWorkManager.cancelAllWorkByTag("demo")
@@ -33,11 +34,11 @@ class DownloadFileActivity : AppCompatActivity() {
 
         // val constrains = Constraints.Builder().setRequiredNetworkType(NetworkType.UNMETERED).build()
         val inputData = Data.Builder()
-            .putString("imgUrl","https://images.all-free-download.com/images/graphicwebp/nature_picture_elegant_contrast_closeup_mushroom_6931741.webp")
+            .putString("imgUrl","https://i.imgflip.com/3lmzyx.jpg")
             .build()
 
         val constrains = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
 
         // Created a Work Request
         val workRequest = OneTimeWorkRequestBuilder<FileDownloadWorker>()
@@ -53,15 +54,26 @@ class DownloadFileActivity : AppCompatActivity() {
         }
 
         val status = findViewById<TextView>(R.id.downLoadStatus)
-
+        i = progressBar.progress
         workManager.getWorkInfoByIdLiveData(workRequest.id).observe(this){
             if (it != null){
                 val state = it.state
                 status.append(state.toString()+"\n")
-                Toast.makeText(this, it.progress.toString(), Toast.LENGTH_SHORT).show()
+                val progress = it.progress.getInt(PROGRESS,0)
+
+
+                Thread(Runnable {
+                    i = progress
+                        handler.post {
+                            progressBar.progress = i
+                            progressBarTv.text = i.toString()+"/"+progressBar.max
+                        }
+
+                }).start()
+
+//                Toast.makeText(this,.toString() , Toast.LENGTH_SHORT).show()
             }
 
         }
-
     }
 }
