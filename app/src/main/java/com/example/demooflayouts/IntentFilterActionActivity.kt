@@ -12,7 +12,7 @@ class IntentFilterActionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intent_filter_action)
-        val url = findViewById<EditText>(R.id.url_et)
+        val url = findViewById<EditText>(R.id.et_url)
         if(intent?.action == Intent.ACTION_SEND){
            val imgUri  = intent.extras?.get(Intent.EXTRA_STREAM) as Uri
 //            val bundle = Uri.parse(intent.extras?.get(Intent.EXTRA_STREAM).toString())

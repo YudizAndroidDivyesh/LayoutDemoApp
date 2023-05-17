@@ -29,6 +29,7 @@ class FileDownloadWorker(context: Context, workerParams: WorkerParameters) :
            val pro = i * 5
            setProgressAsync(workDataOf("progress" to i * 5))
            Log.d("Img",i.toString())
+           Log.d("Progress",pro.toString())
            Thread.sleep(2000)
        }
 

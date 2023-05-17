@@ -40,13 +40,13 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
             channel.description = "This Is Battery BroadCast"
 
             val intent = Intent(this,ActionOnBroadCastActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
+           // val pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
 
             val layoutRemote = RemoteViews(packageName,R.layout.custom_expanded_notifiction)
             layoutRemote.setOnClickPendingIntent(R.id.broadCast_start,
-                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java),PendingIntent.FLAG_IMMUTABLE))
+                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java),PendingIntent.FLAG_MUTABLE))
             layoutRemote.setOnClickPendingIntent(R.id.broadCast_stop,
-                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java),PendingIntent.FLAG_IMMUTABLE))
+                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java),PendingIntent.FLAG_MUTABLE))
 
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
@@ -55,7 +55,7 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
                 setSmallIcon(R.drawable.baseline_battery_charging_full_24)
                 setContentTitle("Activity Second")
                 setPriority(NotificationCompat.PRIORITY_HIGH)
-                setContentIntent(pendingIntent)
+              //  setContentIntent(pendingIntent)
                 setAutoCancel(true)
                 setCustomBigContentView(layoutRemote)
                 layoutRemote.setTextViewText(R.id.statusCheck_tv,getString(R.string.batteryPercentage)+" "+data)

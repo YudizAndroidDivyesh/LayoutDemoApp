@@ -28,6 +28,7 @@ class AllTaskList : AppCompatActivity() {
         val task12 = findViewById<Button>(R.id.intentAction)
         val task13 = findViewById<Button>(R.id.broadCast)
         val task14 = findViewById<Button>(R.id.workManager)
+        val task15 = findViewById<Button>(R.id.save_file_btn)
 
 
         task1.setOnClickListener {
@@ -70,6 +71,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task14.setOnClickListener {
             startActivity(Intent(applicationContext,DownloadFileActivity::class.java))
+        }
+        task15.setOnClickListener {
+            startActivity(Intent(applicationContext,SaveFileActivity::class.java))
         }
     }
 }
