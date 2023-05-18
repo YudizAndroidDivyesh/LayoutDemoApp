@@ -145,6 +145,7 @@ class SaveFileActivity : AppCompatActivity() {
             // These for devices running on android < Q
             imgUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValue)
             fos = imgUri?.let { contentResolver.openOutputStream(it) }
+            Log.d("Path",imgUri.toString())
         }
         fos?.use {
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,it)
@@ -160,6 +161,7 @@ class SaveFileActivity : AppCompatActivity() {
             screenshot = Bitmap.createBitmap(image.width,image.height,Bitmap.Config.ARGB_8888)
             val canvas = Canvas(screenshot)
             image.draw(canvas)
+
         }catch (e : Exception){
             Log.d("Images Not Captured : ",e.message.toString())
         }

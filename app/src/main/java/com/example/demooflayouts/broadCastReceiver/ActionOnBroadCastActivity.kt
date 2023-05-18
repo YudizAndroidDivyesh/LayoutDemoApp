@@ -44,9 +44,9 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
 
             val layoutRemote = RemoteViews(packageName,R.layout.custom_expanded_notifiction)
             layoutRemote.setOnClickPendingIntent(R.id.broadCast_start,
-                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java),PendingIntent.FLAG_MUTABLE))
+                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java).setAction("Start"),PendingIntent.FLAG_MUTABLE))
             layoutRemote.setOnClickPendingIntent(R.id.broadCast_stop,
-                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java),PendingIntent.FLAG_MUTABLE))
+                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java).setAction("Stop"),PendingIntent.FLAG_MUTABLE))
 
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
@@ -57,8 +57,8 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
                 setPriority(NotificationCompat.PRIORITY_HIGH)
               //  setContentIntent(pendingIntent)
                 setAutoCancel(true)
-                setCustomBigContentView(layoutRemote)
                 layoutRemote.setTextViewText(R.id.statusCheck_tv,getString(R.string.batteryPercentage)+" "+data)
+                setCustomBigContentView(layoutRemote)
             }
             manager.notify(0,builder.build())
         }
@@ -78,7 +78,6 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         registerReceiver(batteryBroadCast, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
     }
     override fun onStop() {

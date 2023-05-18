@@ -3,6 +3,7 @@ package com.example.demooflayouts.workManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -34,7 +35,7 @@ class DownloadFileActivity : AppCompatActivity() {
 
         // val constrains = Constraints.Builder().setRequiredNetworkType(NetworkType.UNMETERED).build()
         val inputData = Data.Builder()
-            .putString("imgUrl","https://i.imgflip.com/3lmzyx.jpg")
+            .putString("imgUrl","https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Pizigani_1367_Chart_10MB.jpg/8192px-Pizigani_1367_Chart_10MB.jpg")
             .build()
 
         val constrains = Constraints.Builder()
@@ -50,6 +51,11 @@ class DownloadFileActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.DownLoadBtn).setOnClickListener {
              // Submit the WorkRequest to the system
+
+//            for (i in 1..5){
+//                Thread.sleep(2000)
+//                progressBarTv.text = i.toString()
+//            }
             WorkManager.getInstance(this).enqueue(workRequest)
         }
 
@@ -58,18 +64,17 @@ class DownloadFileActivity : AppCompatActivity() {
         workManager.getWorkInfoByIdLiveData(workRequest.id).observe(this){
             if (it != null){
                 val state = it.state
-                status.append(state.toString()+"\n")
+                status.text = state.toString()
                 val progress = it.progress.getInt(PROGRESS,0)
-
-
-                Thread(Runnable {
+                Log.d("Progress",  "State: $state Current Progress: $progress")
+                Thread {
                     i = progress
-                        handler.post {
-                            progressBar.progress = i
-                            progressBarTv.text = i.toString()+"/"+progressBar.max
-                        }
+                    handler.post {
+                        progressBar.progress = progress
+                        progressBarTv.text = progress.toString() + "/" + progressBar.max
+                    }
 
-                }).start()
+                }.start()
 
 //                Toast.makeText(this,.toString() , Toast.LENGTH_SHORT).show()
             }

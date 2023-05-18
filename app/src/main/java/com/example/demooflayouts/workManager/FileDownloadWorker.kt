@@ -9,10 +9,12 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import java.io.BufferedInputStream
+import java.io.FileOutputStream
+import java.io.InputStream
 import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -26,39 +28,62 @@ class FileDownloadWorker(context: Context, workerParams: WorkerParameters) :
         val imageUrl = inputData.getString("imgUrl")
         Log.d("Img", imageUrl.toString())
         if (imageUrl == null) return Result.failure()
-        val bitmap = imageUrl?.let { downloadImg(it) }
-        Log.d("ImageBitmap", bitmap.toString())
-        if (bitmap != null) {
-            saveFileToStorage(bitmap)
-        }
+        downloadImg(imageUrl)
+//        val bitmap = imageUrl?.let { }
+//        Log.d("ImageBitmap", bitmap.toString())
         return Result.success()
 
     }
 
-    private fun downloadImg(imgUri: String?): Bitmap? {
-        for (i in 0..20) {
-            val pro = i * 5
-            setProgressAsync(workDataOf("progress" to i * 5))
-            Log.d("Progress", pro.toString())
-            Thread.sleep(2000)
-        }
-        return try {
-            val url = URL(imgUri)
-            val connection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-            val input = connection.inputStream
-            BitmapFactory.decodeStream(input)
+    private fun downloadImg(imgUri: String?){
+
+        var input : InputStream?
+        var count = 0
+        var outPut: OutputStream?
+
+        try {
+             val url = URL(imgUri)
+             val connection = url.openConnection() as HttpURLConnection
+             connection.doInput = true
+             val dataSize = connection.contentLength
+
+             Log.d("Size", connection.contentLength.toString())
+             connection.connect()
+             input = connection.inputStream
+            outPut = FileOutputStream("/storage/emulated/0/DCIM/wikiImage.jpg")
+
+             val data = ByteArray(2048)
+             var total = 0
+            count = input.read(data)
+            Log.d("Count",count.toString())
+            while (count != -1){
+                 total += count
+                setProgressAsync(workDataOf("progress" to (total * 100) / dataSize))
+                outPut.write(data,0,count)
+                Log.d("Count",data.toString())
+                count = input.read(data)
+            }
+            outPut.run {
+                 flush()
+                 close()
+             }
+             input.close()
+//             input = connection.inputStream
+//             for (i in 1..   connection.contentLength/2024) {
+//                 Log.d("Progress",  "Sending Progress: $i")
+//                setProgressAsync(workDataOf("progress" to i))
+//                 Thread.sleep(100)
+//                }
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+
         }
     }
 
     private fun saveFileToStorage(bitmap: Bitmap) {
         val fileName = "${System.currentTimeMillis()}.jpg"
-        var fos: OutputStream? = null
-        var imgUri: Uri?
+        val fos: OutputStream?
+        val imgUri: Uri?
 
         val contentResolver = applicationContext.contentResolver
         val contentValue = ContentValues()
@@ -71,10 +96,10 @@ class FileDownloadWorker(context: Context, workerParams: WorkerParameters) :
             imgUri =
                 contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValue)
             fos = imgUri?.let { contentResolver.openOutputStream(it) }
-            fos?.use {
-                bitmap.compress(Bitmap.CompressFormat.JPEG,100,it)
-                Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
-            }
+//            fos?.use {
+//                bitmap.compress(Bitmap.CompressFormat.JPEG,100,it)
+//              //  Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
+//            }
         }
     }
 }
