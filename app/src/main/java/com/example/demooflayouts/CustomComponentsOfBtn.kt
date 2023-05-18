@@ -12,41 +12,42 @@ import android.widget.TextView
 
 class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayout(context,attrs){
 
-
-    lateinit var tv_Title : TextView
     private lateinit var Btn_txt : TextView
-    lateinit var frameLayoutBtn : FrameLayout
-    lateinit var progressBar  : ProgressBar
+    private lateinit var frameLayoutBtn : FrameLayout
+    private lateinit var progressBar  : ProgressBar
 
     init {
         addCustomView(context, attrs)
 
     }
 
-    fun btnMsg(){
+    fun progressVisible(){
+        Btn_txt.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+    }
+    fun progressStart(){
+        handler.postDelayed( {
+            Btn_txt.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+        },5000)
 
     }
 
-    fun addCustomView(context: Context, attrs: AttributeSet?){
+    private fun addCustomView(context: Context, attrs: AttributeSet?){
         LayoutInflater.from(context).inflate(R.layout.custom_btn_progress,this,true)
         orientation = VERTICAL
 
         frameLayoutBtn = findViewById(R.id.frameBtn)
-        tv_Title = findViewById(R.id.tv_msg)
         Btn_txt = findViewById(R.id.progressBtn)
         progressBar = findViewById(R.id.pgNow)
 
-
-
         attrs?.let {
             val typeArr : TypedArray =  context.obtainStyledAttributes(it,R.styleable.CustomComponentsOfBtn)
-            val titleText =  typeArr.getString(R.styleable.CustomComponentsOfBtn_cust_btn)
             val txtBtn = typeArr.getString(R.styleable.CustomComponentsOfBtn_cust_txt)
             typeArr.recycle()
-            tv_Title.text = titleText
             Btn_txt.text = txtBtn
         }
-        frameLayoutBtn.setOnClickListener {
+//        frameLayoutBtn.setOnClickListener {
 //                if(isProgress){
 //                    Btn_txt.visibility = View.GONE
 //                    progressBar.visibility = View.VISIBLE
@@ -56,14 +57,6 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
 //                    progressBar.visibility = View.GONE
 //                    isProgress = true
 //                }
-            Btn_txt.visibility = View.GONE
-            progressBar.visibility = View.VISIBLE
-
-            handler.postDelayed( {
-                Btn_txt.visibility = View.VISIBLE
-                progressBar.visibility = View.GONE
-            },5000)
-
-        }
+    //}
     }
 }

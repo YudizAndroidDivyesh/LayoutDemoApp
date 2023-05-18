@@ -8,10 +8,10 @@ class CustomComponents : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_components)
-        
-        findViewById<CustomComponentsOfBtn>(R.id.custView).setOnClickListener {
-
-            Toast.makeText(applicationContext, "dsfdsf", Toast.LENGTH_SHORT).show()
-        }
+        val customBtn = findViewById<CustomComponentsOfBtn>(R.id.custView)
+         customBtn.setOnClickListener {
+              customBtn.progressVisible()
+              customBtn.progressStart()
+            }
     }
 }
