@@ -51,11 +51,6 @@ class DownloadFileActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.DownLoadBtn).setOnClickListener {
              // Submit the WorkRequest to the system
-
-//            for (i in 1..5){
-//                Thread.sleep(2000)
-//                progressBarTv.text = i.toString()
-//            }
             WorkManager.getInstance(this).enqueue(workRequest)
         }
 
