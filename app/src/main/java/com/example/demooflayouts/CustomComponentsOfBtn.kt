@@ -15,7 +15,7 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
     private lateinit var Btn_txt : TextView
     private lateinit var frameLayoutBtn : FrameLayout
     private lateinit var progressBar  : ProgressBar
-
+    private var click : Click? = null
     init {
         addCustomView(context, attrs)
 
@@ -47,6 +47,11 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
             typeArr.recycle()
             Btn_txt.text = txtBtn
         }
+
+        setOnClickListener {
+            click?.onButtonClick(it)
+
+        }
 //        frameLayoutBtn.setOnClickListener {
 //                if(isProgress){
 //                    Btn_txt.visibility = View.GONE
@@ -58,5 +63,13 @@ class CustomComponentsOfBtn(context: Context, attrs: AttributeSet?) : LinearLayo
 //                    isProgress = true
 //                }
     //}
+    }
+
+    fun setCustomClick(c : Click){
+        click = c
+    }
+
+    interface Click{
+        fun onButtonClick(v : View)
     }
 }

@@ -29,6 +29,7 @@ class AllTaskList : AppCompatActivity() {
         val task13 = findViewById<Button>(R.id.broadCast)
         val task14 = findViewById<Button>(R.id.workManager)
         val task15 = findViewById<Button>(R.id.save_file_btn)
+        val task16 = findViewById<Button>(R.id.btn_animation)
 
 
         task1.setOnClickListener {
@@ -74,6 +75,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task15.setOnClickListener {
             startActivity(Intent(applicationContext,SaveFileActivity::class.java))
+        }
+        task16.setOnClickListener {
+            startActivity(Intent(applicationContext,ViewAnimationActivity::class.java))
         }
     }
 }

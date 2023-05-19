@@ -52,7 +52,7 @@ class RuntimePermissionStartActivity : AppCompatActivity() {
 
     }
     private fun askPermission(){
-        if (VERSION.SDK_INT >= VERSION_CODES.M){
+        if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU){
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
                 val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
                 requestPermissions(permissions,2)
