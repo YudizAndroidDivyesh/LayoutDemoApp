@@ -33,41 +33,42 @@ class FileDownloadWorker(context: Context, workerParams: WorkerParameters) :
 
     }
 
-    private fun downloadImg(imgUri: String?){
+    private fun downloadImg(imgUri: String?) {
 
-        var input : InputStream?
+        var input: InputStream?
         var count = 0
         var outPut: OutputStream?
 
         try {
-             val url = URL(imgUri)
-             val connection = url.openConnection() as HttpURLConnection
-             connection.doInput = true
-             val dataSize = connection.contentLength
+            val url = URL(imgUri)
+            val connection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            val dataSize = connection.contentLength
 
-             Log.d("Size", connection.contentLength.toString())
-             connection.connect()
-             input = connection.inputStream
+            Log.d("Size", connection.contentLength.toString())
+            connection.connect()
+            input = connection.inputStream
             outPut = FileOutputStream("/storage/emulated/0/DCIM/wikiImage.jpg")
 
-             val data = ByteArray(2048)
-             var total = 0
+            val data = ByteArray(2048)
+            var total = 0
             count = input.read(data)
-            Log.d("Count",count.toString())
-            while (count != -1){
-                 total += count
+            Log.d("Count", count.toString())
+            while (count != -1) {
+                total += count
                 setProgressAsync(workDataOf("progress" to (total * 100) / dataSize))
-                outPut.write(data,0,count)
-                Log.d("Count",data.toString())
+                outPut.write(data, 0, count)
+                Log.d("Count", data.toString())
                 count = input.read(data)
             }
             outPut.run {
-                 flush()
-                 close()
-             }
-             input.close()
+                flush()
+                close()
+            }
+            input.close()
         } catch (e: Exception) {
             e.printStackTrace()
 
         }
     }
+}
