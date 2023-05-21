@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/caryellow"
+        android:transitionName="m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -76,26 +77,29 @@
         app:layout_constraintTop_toBottomOf="@+id/move_btn" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/single_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Single"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="543dp" />
+        app:layout_constraintEnd_toStartOf="@+id/pair_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zoom_btn" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/pair_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pair"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="536dp" />
+        app:layout_constraintEnd_toStartOf="@+id/bounced_btn"
+        app:layout_constraintStart_toEndOf="@+id/zoom_btn"
+        app:layout_constraintTop_toBottomOf="@+id/bounced_btn" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/activity_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BottomAnimation"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="603dp" />
+        app:layout_constraintEnd_toEndOf="@+id/pair_btn"
+        app:layout_constraintStart_toStartOf="@+id/single_btn"
+        app:layout_constraintTop_toBottomOf="@+id/pair_btn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

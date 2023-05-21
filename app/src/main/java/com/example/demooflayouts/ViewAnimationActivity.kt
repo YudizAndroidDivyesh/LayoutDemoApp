@@ -3,13 +3,17 @@ package com.example.demooflayouts
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Pair
 import android.view.animation.AnimationUtils
 import android.view.animation.BounceInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
 
 class ViewAnimationActivity : AppCompatActivity() {
 
@@ -66,6 +70,24 @@ class ViewAnimationActivity : AppCompatActivity() {
             animation.start()
         }
 
+        findViewById<Button>(R.id.activity_btn).setOnClickListener {
+            val intent = Intent(this,SaveFileActivity::class.java)
+            val option = ActivityOptions.makeCustomAnimation(this,R.anim.slidedownanim,R.anim.slidedownanim)
+            startActivity(intent,option.toBundle())
+
+        }
+
+        findViewById<Button>(R.id.single_btn).setOnClickListener {
+            val intent = Intent(this,SaveFileActivity::class.java)
+            val option = ActivityOptions.makeSceneTransitionAnimation(this,carIv,ViewCompat.getTransitionName(carIv))
+            startActivity(intent,option.toBundle())
+        }
+
+        findViewById<Button>(R.id.pair_btn).setOnClickListener {
+            val intent = Intent(this,SaveFileActivity::class.java)
+            val option = ActivityOptions.makeSceneTransitionAnimation(this, Pair.create(carIv,"m"),Pair.create(carIv,"m"))
+            startActivity(intent,option.toBundle())
+        }
 
     }
 }

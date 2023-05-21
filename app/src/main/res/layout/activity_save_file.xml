@@ -10,7 +10,8 @@
         android:id="@+id/iv_car"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/carimg"
+        android:src="@drawable/caryellow"
+        android:transitionName="m"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

@@ -28,4 +28,6 @@
     <string name="dialogbox">DialogBox</string>
     <string name="delete_records">Delete Records</string>
     <string name="batteryPercentage">Your Battery Percentage Is </string>
+
+
 </resources>
