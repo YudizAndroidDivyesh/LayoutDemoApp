@@ -36,7 +36,12 @@
             android:exported="false" />
         <activity
             android:name=".broadCastReceiver.BroadCastPercentageActivity"
-            android:exported="false" /> <!-- <receiver android:name=".broadCastReceiver.ActionOnBroadCastActivity" android:exported="true"/> -->
+            android:exported="false" />
+        <receiver android:name=".broadCastReceiver.ActionOnBroadCastActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_CHANGED"/>
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".IntentFilterActionActivity"
             android:exported="true">

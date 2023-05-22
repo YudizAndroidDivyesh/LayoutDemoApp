@@ -30,6 +30,7 @@ class AllTaskList : AppCompatActivity() {
         val task14 = findViewById<Button>(R.id.workManager)
         val task15 = findViewById<Button>(R.id.save_file_btn)
         val task16 = findViewById<Button>(R.id.btn_animation)
+        val task17 = findViewById<Button>(R.id.btn_thread)
 
 
         task1.setOnClickListener {
@@ -78,6 +79,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task16.setOnClickListener {
             startActivity(Intent(applicationContext,ViewAnimationActivity::class.java))
+        }
+        task17.setOnClickListener {
+            startActivity(Intent(applicationContext,MultiThreadingActivity::class.java))
         }
     }
 }

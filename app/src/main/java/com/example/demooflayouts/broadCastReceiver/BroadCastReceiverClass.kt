@@ -5,19 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
-import android.view.View
 import android.widget.Toast
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
-class BroadCastReceiverClass : BroadcastReceiver {
-    lateinit var actionOnBroadCast: ActionOnBroadCastActivity
-
-    private constructor()
-    constructor(action: ActionOnBroadCastActivity) {
-        actionOnBroadCast = action
-    }
-
-    override fun onReceive(context: Context?, intent: Intent) {
-        Log.d("Action", context.toString())
+class BroadCastReceiverClass : BroadcastReceiver() {
+     var batteryStatus: Intent? = null
+      override fun onReceive(context: Context, intent: Intent) {
+        Log.d("Action", intent.toString())
 
 //        val percentageData = intent.getIntExtra("level", 0)
 //        Log.d("percentageData",percentageData.toString())
@@ -27,14 +21,16 @@ class BroadCastReceiverClass : BroadcastReceiver {
 
         // actionOnBroadCast.liveBatteryData.text = "Your battery percentage is "+percentageData.toString()+"%"
         try {
+            val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+
             when (intent.action) {
                 "Start" -> {
                   //  register(percentageData)
+                    batteryStatus = context.registerReceiver(null, intentFilter)
                     Toast.makeText(context, "Start", Toast.LENGTH_SHORT).show()
                 }
                 "Stop" -> {
-                   // unregister()
-                    Toast.makeText(context, "Stop", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(context, "Stop", Toast.LENGTH_SHORT).show()
                 }
             }
         } catch (e: Exception) {

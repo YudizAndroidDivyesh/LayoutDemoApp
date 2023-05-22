@@ -31,21 +31,15 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
         statusTv?.text = ""
 
 
-        //   register(0)
+           register(0)
 
         // registerReceiver(BroadCastReceiverClass(),Intent.ACTION_BATTERY_CHANGED)
     }
 
-    override fun onStart() {
-        super.onStart()
-        registerReceiver(batteryBroadCast, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-
-        liveBatteryData.text = "Your battery percentage is 0%"
-    }
-
     fun register(percentageData: Int) {
         statusTv?.text = "Start"
-        Log.d("Receive",percentageData.toString())
+        registerReceiver(batteryBroadCast, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        liveBatteryData.text = "Your battery percentage is 0%"
 
     }
 
@@ -78,11 +72,10 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
             //   val intent = Intent(this,ActionOnBroadCastActivity::class.java)
             // val pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
 
-            val startIntent =  Intent("CustomRegister").setAction("Start")
-            LocalBroadcastManager.getInstance(this).sendBroadcast(startIntent)
+            val startIntent =  Intent(this,BroadCastNotificationClass::class.java).setAction("Start")
 
-            val stopIntent =  Intent("CustomUnRegister").setAction("Stop")
-            LocalBroadcastManager.getInstance(this).sendBroadcast(stopIntent)
+            val stopIntent =  Intent(this,BroadCastNotificationClass::class.java).setAction("Stop")
+
             val layoutRemote = RemoteViews(packageName, R.layout.custom_expanded_notifiction)
             layoutRemote.setOnClickPendingIntent(
                 R.id.broadCast_start, PendingIntent.getBroadcast(
@@ -120,4 +113,35 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
         }
 
     }
+}
+class BroadCastNotificationClass : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        Log.d("Action", intent.toString())
+
+//        val percentageData = intent.getIntExtra("level", 0)
+//        Log.d("percentageData",percentageData.toString())
+//        actionOnBroadCast.register(percentageData)
+//        actionOnBroadCast.actionOnBroadCast(percentageData)
+//        Log.d("Status", intent.action.toString())
+
+        // actionOnBroadCast.liveBatteryData.text = "Your battery percentage is "+percentageData.toString()+"%"
+        try {
+            val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+
+            when (intent.action) {
+                "Start" -> {
+                    //  register(percentageData)
+                    Toast.makeText(context, "Start", Toast.LENGTH_SHORT).show()
+                }
+                "Stop" -> {
+                    Toast.makeText(context, "Stop", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+
+    }
+
 }
