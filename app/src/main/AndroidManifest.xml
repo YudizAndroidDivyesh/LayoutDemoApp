@@ -31,9 +31,11 @@
         <activity
             android:name=".broadCastReceiver.ActionOnBroadCastActivity"
             android:exported="false" />
+
         <activity
             android:name=".broadCastReceiver.BroadCastPercentageActivity"
             android:exported="false" />
+        <receiver android:name=".broadCastReceiver.ActionOnBroadCastActivity" android:exported="true"/>
         <activity
             android:name=".IntentFilterActionActivity"
             android:exported="true">
@@ -114,13 +116,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <receiver android:name=".broadCastReceiver.BroadCastReceiverClass" android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BATTERY_CHANGED"/>
-            </intent-filter>
-        </receiver>
-
     </application>
 
 </manifest>

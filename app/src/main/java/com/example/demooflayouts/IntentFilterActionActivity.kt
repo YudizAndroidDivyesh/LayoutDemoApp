@@ -21,11 +21,22 @@ class IntentFilterActionActivity : AppCompatActivity() {
             findViewById<ImageView>(R.id.foreign_img).setImageURI(imgUri)
         }
         findViewById<Button>(R.id.redirect_btn).setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-              //  data = Uri.parse("https://www.google.com/search?q="+url.text)
-                data = Uri.parse("https://www."+url.text+".com")
-            }
-            startActivity(Intent.createChooser(intent,"Select Any One"))
+//            val intent = Intent(Intent.ACTION_VIEW).apply {
+//              //  data = Uri.parse("https://www.google.com/search?q="+url.text)
+//                data = Uri.parse("https://www."+url.text+".com")
+//            }
+//            startActivity(Intent.createChooser(intent,"Select Any One"))
+            val uri = Uri.parse("https://www.google.com")
+            val browsers = arrayOf(
+                Intent(Intent.ACTION_VIEW, uri).setPackage("com.android.chrome"),
+                Intent(Intent.ACTION_VIEW, uri).setPackage("org.mozilla.firefox"),
+                Intent(Intent.ACTION_VIEW, uri).setPackage("com.opera.browser")
+            )
+
+            val chooser = Intent.createChooser(browsers[0], "Open with")
+            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, browsers.sliceArray(1 until browsers.size))
+            startActivity(chooser)
+
         }
     }
 }

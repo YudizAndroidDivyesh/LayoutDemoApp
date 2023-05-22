@@ -12,67 +12,111 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.demooflayouts.R
 
 class ActionOnBroadCastActivity : AppCompatActivity() {
 
-    private lateinit var statusTv : TextView
-    lateinit var liveBatteryData : TextView
-   private var data = ""
+    private  var statusTv: TextView? = null
+    lateinit var liveBatteryData: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_action_on_broad_cast)
 
-        statusTv = findViewById(R.id.status_tv)
+        statusTv = findViewById(R.id.status_battery_tv)
         liveBatteryData = findViewById(R.id.liveStatusOfBattery_tv)
-        statusTv.text = ""
-        actionOnBroadCast()
-        register(0)
+        statusTv?.text = ""
 
-       // registerReceiver(BroadCastReceiverClass(),Intent.ACTION_BATTERY_CHANGED)
+
+        //   register(0)
+
+        // registerReceiver(BroadCastReceiverClass(),Intent.ACTION_BATTERY_CHANGED)
     }
 
-fun register(percentageData : Int){
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(batteryBroadCast, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
 
-    registerReceiver(BroadCastReceiverClass(),IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-
-    liveBatteryData.text = "Your battery percentage is "+percentageData.toString()+"%"
-}
-    fun unregister(){
-
-        unregisterReceiver(BroadCastReceiverClass())
+        liveBatteryData.text = "Your battery percentage is 0%"
     }
 
-    private fun actionOnBroadCast() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val channel = NotificationChannel("BatteryAction","BatteryChannel",NotificationManager.IMPORTANCE_HIGH)
+    fun register(percentageData: Int) {
+        statusTv?.text = "Start"
+        Log.d("Receive",percentageData.toString())
+
+    }
+
+    fun unregister() {
+          statusTv?.text = "Stop"
+        unregisterReceiver(batteryBroadCast)
+    }
+
+
+    val batteryBroadCast = object : BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent) {
+            Log.d("Action", context.toString())
+
+            val percentageData = intent.getIntExtra("level", 0)
+            Log.d("percentageData",percentageData.toString())
+            liveBatteryData.text = "Your battery percentage is " + percentageData.toString() + "%"
+            actionOnBroadCast(percentageData)
+            Log.d("Status", intent.action.toString())
+        }
+
+    }
+
+    fun actionOnBroadCast(percentageData: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "BatteryAction", "BatteryChannel", NotificationManager.IMPORTANCE_HIGH
+            )
             channel.description = "This Is Battery BroadCast"
 
             //   val intent = Intent(this,ActionOnBroadCastActivity::class.java)
             // val pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
 
-            val layoutRemote = RemoteViews(packageName,R.layout.custom_expanded_notifiction)
-            layoutRemote.setOnClickPendingIntent(R.id.broadCast_start,
-                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java).setAction("Start"),PendingIntent.FLAG_IMMUTABLE))
-            layoutRemote.setOnClickPendingIntent(R.id.broadCast_stop,
-                PendingIntent.getBroadcast(this,0, Intent(this,BroadCastReceiverClass::class.java).setAction("Stop"),PendingIntent.FLAG_IMMUTABLE))
+            val startIntent =  Intent("CustomRegister").setAction("Start")
+            LocalBroadcastManager.getInstance(this).sendBroadcast(startIntent)
+
+            val stopIntent =  Intent("CustomUnRegister").setAction("Stop")
+            LocalBroadcastManager.getInstance(this).sendBroadcast(stopIntent)
+            val layoutRemote = RemoteViews(packageName, R.layout.custom_expanded_notifiction)
+            layoutRemote.setOnClickPendingIntent(
+                R.id.broadCast_start, PendingIntent.getBroadcast(
+                    this,
+                    0,
+                    startIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+            )
+            layoutRemote.setOnClickPendingIntent(
+                R.id.broadCast_stop, PendingIntent.getBroadcast(
+                    this,
+                    0,
+                    stopIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+            )
 
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
-            val builder = NotificationCompat.Builder(this,"BatteryAction")
+            val builder = NotificationCompat.Builder(this, "BatteryAction")
             builder.apply {
                 setSmallIcon(R.drawable.baseline_battery_charging_full_24)
                 setContentTitle("Activity Second")
                 priority = NotificationCompat.PRIORITY_HIGH
                 //  setContentIntent(pendingIntent)
                 setAutoCancel(true)
-                layoutRemote.setTextViewText(R.id.statusCheck_tv,getString(R.string.batteryPercentage)+" "+data)
+                layoutRemote.setTextViewText(
+                    R.id.statusCheck_tv,
+                    getString(R.string.batteryPercentage) + " " + percentageData
+                )
                 setCustomBigContentView(layoutRemote)
             }
-            manager.notify(0,builder.build())
+            manager.notify(0, builder.build())
         }
 
     }
