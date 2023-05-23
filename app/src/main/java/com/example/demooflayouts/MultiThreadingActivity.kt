@@ -30,10 +30,7 @@ open class MultiThreadingActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_normalThread).setOnClickListener {
             var result = 0
            try {
-           val t =     Thread(Runnable {
-            result =   (23+ 23)
-
-               })
+           val t =     Thread(Runnable {result =   23+ 23 })
                t.run()
                normalThreadTv.text = result.toString()
 
