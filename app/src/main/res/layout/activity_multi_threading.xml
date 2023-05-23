@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MultiThreadingActivity">
 
+
     <Button
         android:id="@+id/btn_normalThread"
         android:layout_width="wrap_content"
@@ -47,4 +48,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_threadOnThread"
         app:layout_constraintTop_toBottomOf="@id/tv_normalThread" />
+
+    <Button
+        android:id="@+id/btn_async"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AsyncThread"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_async"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_threadOnThread" />
+
+    <TextView
+        android:id="@+id/tv_async"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_async"
+        app:layout_constraintTop_toBottomOf="@+id/tv_threadOnThread" />
+
+    <Button
+        android:id="@+id/btn_coroutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="coroutine"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_coroutine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_async" />
+
+    <TextView
+        android:id="@+id/tv_coroutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_coroutine"
+        app:layout_constraintTop_toBottomOf="@+id/tv_async" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
