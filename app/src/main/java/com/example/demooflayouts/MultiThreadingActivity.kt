@@ -37,16 +37,6 @@ open class MultiThreadingActivity : AppCompatActivity() {
            }catch (e : Exception){
                e.printStackTrace()
            }
-
-//            val handler = Handler()
-//
-//            Thread {
-//                handler.post {
-//                    val result = 1230 + 1541
-//                    normalThreadTv.text = result.toString()
-//                }
-//            }.start()
-
         }
 
 //        Create two threads to perform any operations on a number. Print the final result on the screen. (Use any mathematical operations)
