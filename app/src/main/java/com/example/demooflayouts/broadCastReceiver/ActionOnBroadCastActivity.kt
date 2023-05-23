@@ -20,6 +20,8 @@ import com.example.demooflayouts.R
 
 class ActionOnBroadCastActivity : AppCompatActivity() {
 
+
+
     private  var statusTv: TextView? = null
     lateinit var liveBatteryData: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +40,8 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
 
     fun register(percentageData: Int) {
         statusTv?.text = "Start"
-        registerReceiver(batteryBroadCast, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-        liveBatteryData.text = "Your battery percentage is 0%"
+        this.registerReceiver(batteryBroadCast, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        liveBatteryData.text = "Your battery percentage is $percentageData%"
 
     }
 
@@ -72,9 +74,11 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
             //   val intent = Intent(this,ActionOnBroadCastActivity::class.java)
             // val pendingIntent = PendingIntent.getBroadcast(this,0,intent,PendingIntent.FLAG_IMMUTABLE)
 
-            val startIntent =  Intent(this,BroadCastNotificationClass::class.java).setAction("Start")
+            val startIntent =  Intent(this,BroadCastReceiverClass::class.java).setAction("Start")
 
-            val stopIntent =  Intent(this,BroadCastNotificationClass::class.java).setAction("Stop")
+
+            val stopIntent =  Intent(this,BroadCastReceiverClass::class.java).setAction("Stop")
+
 
             val layoutRemote = RemoteViews(packageName, R.layout.custom_expanded_notifiction)
             layoutRemote.setOnClickPendingIntent(
@@ -114,34 +118,34 @@ class ActionOnBroadCastActivity : AppCompatActivity() {
 
     }
 }
-class BroadCastNotificationClass : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        Log.d("Action", intent.toString())
-
-//        val percentageData = intent.getIntExtra("level", 0)
-//        Log.d("percentageData",percentageData.toString())
-//        actionOnBroadCast.register(percentageData)
-//        actionOnBroadCast.actionOnBroadCast(percentageData)
-//        Log.d("Status", intent.action.toString())
-
-        // actionOnBroadCast.liveBatteryData.text = "Your battery percentage is "+percentageData.toString()+"%"
-        try {
-            val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-
-            when (intent.action) {
-                "Start" -> {
-                    //  register(percentageData)
-                    Toast.makeText(context, "Start", Toast.LENGTH_SHORT).show()
-                }
-                "Stop" -> {
-                    Toast.makeText(context, "Stop", Toast.LENGTH_SHORT).show()
-                }
-            }
-        } catch (e: Exception) {
-            Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
-        }
-
-    }
-
-}
+//class BroadCastNotificationClass : BroadcastReceiver() {
+//    override fun onReceive(context: Context, intent: Intent) {
+//        Log.d("Action", intent.toString())
+//
+////        val percentageData = intent.getIntExtra("level", 0)
+////        Log.d("percentageData",percentageData.toString())
+////        actionOnBroadCast.register(percentageData)
+////        actionOnBroadCast.actionOnBroadCast(percentageData)
+////        Log.d("Status", intent.action.toString())
+//
+//        // actionOnBroadCast.liveBatteryData.text = "Your battery percentage is "+percentageData.toString()+"%"
+//        try {
+//            val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+//
+//            when (intent.action) {
+//                "Start" -> {
+//                    //  register(percentageData)
+//                    Toast.makeText(context, "Start", Toast.LENGTH_SHORT).show()
+//                }
+//                "Stop" -> {
+//                    Toast.makeText(context, "Stop", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        } catch (e: Exception) {
+//            Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+//            e.printStackTrace()
+//        }
+//
+//    }
+//
+//}
