@@ -22,15 +22,33 @@ open class MultiThreadingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_multi_threading)
         normalThreadTv = findViewById(R.id.tv_normalThread)
 //   Create a thread that adds 2 numbers and then set the result in a text view.
-        findViewById<Button>(R.id.btn_normalThread).setOnClickListener {
-            val handler = Handler()
 
-            Thread {
-                handler.post {
-                    val result = 1230 + 1541
-                    normalThreadTv.text = result.toString()
-                }
-            }.start()
+
+
+
+
+        findViewById<Button>(R.id.btn_normalThread).setOnClickListener {
+            var result = 0
+           try {
+           val t =     Thread(Runnable {
+            result =   (23+ 23)
+
+               })
+               t.run()
+               normalThreadTv.text = result.toString()
+
+           }catch (e : Exception){
+               e.printStackTrace()
+           }
+
+//            val handler = Handler()
+//
+//            Thread {
+//                handler.post {
+//                    val result = 1230 + 1541
+//                    normalThreadTv.text = result.toString()
+//                }
+//            }.start()
 
         }
 
