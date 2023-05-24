@@ -1,10 +1,10 @@
 package com.example.demooflayouts
 
-import android.content.BroadcastReceiver
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.demooflayouts.roomDBTask.RoomDataBaseActivity
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
 import com.example.demooflayouts.workManager.DownloadFileActivity
 
@@ -31,6 +31,7 @@ class AllTaskList : AppCompatActivity() {
         val task15 = findViewById<Button>(R.id.save_file_btn)
         val task16 = findViewById<Button>(R.id.btn_animation)
         val task17 = findViewById<Button>(R.id.btn_thread)
+        val task18 = findViewById<Button>(R.id.btn_room_db)
 
 
         task1.setOnClickListener {
@@ -82,6 +83,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task17.setOnClickListener {
             startActivity(Intent(applicationContext,MultiThreadingActivity::class.java))
+        }
+        task18.setOnClickListener {
+            startActivity(Intent(applicationContext,RoomDataBaseActivity::class.java))
         }
     }
 }
