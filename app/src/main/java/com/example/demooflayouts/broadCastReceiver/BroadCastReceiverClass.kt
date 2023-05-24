@@ -10,7 +10,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class BroadCastReceiverClass : BroadcastReceiver() {
 
-      override fun onReceive(context: Context, intent: Intent) {
+    val ACTION_KEY : String = "MY_ACTION"
+
+    override fun onReceive(context: Context, intent: Intent) {
         Log.d("Action", intent.toString())
         Log.d("Context", context.toString())
 
@@ -25,6 +27,7 @@ class BroadCastReceiverClass : BroadcastReceiver() {
 
             when (intent.action) {
                 "Start" -> {
+
 //                    val intentFilter = IntentFilter("com.example.demooflayouts.broadCastReceiver.broadCastReceiver.BroadCastPercentageActivity")
 //
 //                    var batteryStatus: Intent? = null
