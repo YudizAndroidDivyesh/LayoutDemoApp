@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.demooflayouts.R
 
-class RoomDataBaseActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room_data_base)
+        setContentView(R.layout.activity_splash_screen)
 
        // val progressBar = findViewById<ProgressBar>(R.id.splash_progressBar)
+
+
 
         Thread{
             Thread.sleep(2000)

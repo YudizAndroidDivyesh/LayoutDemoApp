@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.demooflayouts.roomDBTask.RoomDataBaseActivity
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
+import com.example.demooflayouts.roomDBTask.SplashScreenActivity
 import com.example.demooflayouts.workManager.DownloadFileActivity
 
 class AllTaskList : AppCompatActivity() {
@@ -85,7 +85,7 @@ class AllTaskList : AppCompatActivity() {
             startActivity(Intent(applicationContext,MultiThreadingActivity::class.java))
         }
         task18.setOnClickListener {
-            startActivity(Intent(applicationContext,RoomDataBaseActivity::class.java))
+            startActivity(Intent(applicationContext, SplashScreenActivity::class.java))
         }
     }
 }
