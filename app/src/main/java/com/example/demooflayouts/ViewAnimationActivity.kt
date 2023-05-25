@@ -72,20 +72,25 @@ class ViewAnimationActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.activity_btn).setOnClickListener {
             val intent = Intent(this,SaveFileActivity::class.java)
-            val option = ActivityOptions.makeCustomAnimation(this,R.anim.slidedownanim,R.anim.slidedownanim)
-            startActivity(intent,option.toBundle())
+            //val option = ActivityOptions.makeCustomAnimation(this,R.anim.slidedownanim,R.anim.slidedownanim)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slidedownanim,R.anim.slideupanim)
 
         }
 
         findViewById<Button>(R.id.single_btn).setOnClickListener {
             val intent = Intent(this,SaveFileActivity::class.java)
-            val option = ActivityOptions.makeSceneTransitionAnimation(this,carIv,ViewCompat.getTransitionName(carIv))
+            val option = ActivityOptions.
+            makeSceneTransitionAnimation(this,carIv,ViewCompat.getTransitionName(carIv))
             startActivity(intent,option.toBundle())
         }
 
-        findViewById<Button>(R.id.pair_btn).setOnClickListener {
+       val paitBtn =  findViewById<Button>(R.id.pair_btn)
+           paitBtn.setOnClickListener {
             val intent = Intent(this,SaveFileActivity::class.java)
-            val option = ActivityOptions.makeSceneTransitionAnimation(this, Pair.create(carIv,"m"),Pair.create(carIv,"m"))
+            val option = ActivityOptions.makeSceneTransitionAnimation(this,
+                Pair.create(carIv,"m"),
+                Pair.create(paitBtn,"btn"))
             startActivity(intent,option.toBundle())
         }
 
