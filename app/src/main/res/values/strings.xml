@@ -42,6 +42,14 @@
     <string name="msg_createAccount">Don\'t have an account?</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign Up</string>
+    <string name="HelloMsg">Hello,</string>
+    <string name="add_data">Add Data</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
+    <string name="insert">Insert</string>
+    <string name="cancel">Cancel</string>
+    <style name="update">Update</style>
+    <style name="delete">Delete</style>
 
 
 </resources>

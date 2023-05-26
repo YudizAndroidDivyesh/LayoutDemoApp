@@ -35,7 +35,7 @@ class CreateAccountActivity : AppCompatActivity() {
             if (isValidation()) {
                 GlobalScope.launch {
 
-                    appDatabase.taskDetailDao().insertTask(TaskDetail(0,etUserName.text.toString(),etUserEmail.text.toString(),
+                    appDatabase.userDetailDao().insertUserData(UserDetails(0,etUserName.text.toString(),etUserEmail.text.toString(),
                         etUserPhone.text.toString(),etUserPassword.text.toString()))
 
                 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_gray"
     tools:context=".roomDBTask.HomeActivity">
 
 <!-- appbarlayout   -->
@@ -12,6 +13,7 @@
         android:id="@+id/top_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_gray"
         android:background="@color/material_dynamic_neutral100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +27,6 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="#2D3141"
@@ -34,7 +35,7 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/logout"
@@ -50,14 +51,19 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/task_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        tools:listitem="@layout/rv_user_task_data"
+        app:spanCount="2"
         app:layout_constraintTop_toBottomOf="@id/top_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

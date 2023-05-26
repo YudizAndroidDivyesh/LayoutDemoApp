@@ -5,12 +5,12 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface TaskDetailDao {
+interface UserDetailDao {
 
     @Insert
-    fun insertTask(taskDetail : TaskDetail)
+    fun insertUserData(userDetails : UserDetails)
 
     @Query("select * from userDetails where user_email=:email and user_password=:password")
-    fun getOneRecord(email : String,password : String) : List<TaskDetail>
+    fun getOneUserRecord(email : String, password : String) : List<UserDetails>
 
 }

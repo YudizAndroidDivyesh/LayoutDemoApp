@@ -1,9 +1,9 @@
 package com.example.demooflayouts.roomDBTask
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "userDetailsDB").build()
 
+
         findViewById<TextView>(R.id.tv_login_sign_up).setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
             startActivity(intent)
@@ -37,11 +38,9 @@ class LoginActivity : AppCompatActivity() {
             if (isValidate()) {
 
                 GlobalScope.launch {
-
-                  val record = appDatabase.taskDetailDao().getOneRecord(etEmail.text.toString(), etPassword.text.toString())
-                   // Log.d("Data", "$record")
+                  val record = appDatabase.userDetailDao().getOneUserRecord(etEmail.text.toString(), etPassword.text.toString())
                     if (record.isNotEmpty()) {
-                        storeDetails()
+                        storeLoginDetails(record)
                         val intent = Intent(applicationContext, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -53,7 +52,16 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun storeDetails() {
+    private fun storeLoginDetails(record: List<UserDetails>) {
+            val shredPref = this.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
+        with(shredPref.edit()) {
+            val userRecord = record[0]
+            putLong("uid",userRecord.userId)
+            putString("name",userRecord.user_name)
+            putString("email",userRecord.user_email)
+            putBoolean("isLogin",true)
+            apply()
+        }
 
     }
 

@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.demooflayouts.R
 
 class MyUserAdapter(val context: Context ,private var userList: ArrayList<User>) : RecyclerView.Adapter<MyUserAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_userdata,parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_userdata,parent,false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind( position,userList,holder )
