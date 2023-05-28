@@ -29,7 +29,7 @@
     <string name="delete_records">Delete Records</string>
     <string name="batteryPercentage">Your Battery Percentage Is </string>
 
-<!-- Room DB Strings   -->
+    <!-- Room DB Strings   -->
     <string name="roomTitle">Welcome To \n Room DataBase</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
@@ -44,12 +44,14 @@
     <string name="sign_up">Sign Up</string>
     <string name="HelloMsg">Hello,</string>
     <string name="add_data">Add Data</string>
+    <string name="delete_update_data">Delete Or Update Data</string>
     <string name="task_title">Task Title</string>
     <string name="task_description">Task Description</string>
     <string name="insert">Insert</string>
     <string name="cancel">Cancel</string>
-    <style name="update">Update</style>
-    <style name="delete">Delete</style>
+    <string name="update">update</string>
+    <string name="delete">delete</string>
+    <string name="fab_btn">addHere</string>
 
 
 </resources>

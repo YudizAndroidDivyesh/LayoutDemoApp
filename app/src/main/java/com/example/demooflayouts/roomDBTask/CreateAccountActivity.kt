@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import androidx.room.Room
 import com.example.demooflayouts.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ class CreateAccountActivity : AppCompatActivity() {
     private lateinit var etUserPhone: EditText
     private lateinit var etUserPassword: EditText
     private lateinit var etUserConfirmPassword: EditText
-    private lateinit var appDatabase : AppDatabase
+    private lateinit var appDatabase: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
@@ -30,20 +30,33 @@ class CreateAccountActivity : AppCompatActivity() {
         etUserPassword = findViewById(R.id.et_sign_password)
         etUserConfirmPassword = findViewById(R.id.et_confirm_pass)
 
-        appDatabase = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "userDetailsDB").build()
+        appDatabase = AppDatabase.getDatabase(this)
+
+        findViewById<TextView>(R.id.tv_login_btn).setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
         findViewById<Button>(R.id.btn_sign_up).setOnClickListener {
             if (isValidation()) {
                 GlobalScope.launch {
 
-                    appDatabase.userDetailDao().insertUserData(UserDetails(0,etUserName.text.toString(),etUserEmail.text.toString(),
-                        etUserPhone.text.toString(),etUserPassword.text.toString()))
+                    appDatabase.userDetailDao().insertUserData(
+                        UserDetails(
+                            0,
+                            etUserName.text.toString(),
+                            etUserEmail.text.toString(),
+                            etUserPhone.text.toString(),
+                            etUserPassword.text.toString()
+                        )
+                    )
 
                 }
-
-                //insertTask(TaskDetail("divyesh","divy@ma.com","1234567890","1245780"))
                 Toast.makeText(this, "Account Created", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this,LoginActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -90,7 +103,6 @@ class CreateAccountActivity : AppCompatActivity() {
                 return false
             }
         }
-
         return true
     }
 }

@@ -8,15 +8,15 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.room.Room
 import com.example.demooflayouts.R
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var etEmail: TextView
-    lateinit var etPassword: TextView
-    lateinit var appDatabase: AppDatabase
+    private lateinit var etEmail: TextView
+    private lateinit var etPassword: TextView
+    private lateinit var appDatabase: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -25,8 +25,7 @@ class LoginActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.et_email)
         etPassword = findViewById(R.id.et_password)
 
-        appDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "userDetailsDB").build()
-
+        appDatabase = AppDatabase.getDatabase(this)
 
         findViewById<TextView>(R.id.tv_login_sign_up).setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
@@ -37,9 +36,11 @@ class LoginActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_login).setOnClickListener {
             if (isValidate()) {
 
-                GlobalScope.launch {
-                  val record = appDatabase.userDetailDao().getOneUserRecord(etEmail.text.toString(), etPassword.text.toString())
+                GlobalScope.launch(Dispatchers.IO) {
+                    val record = appDatabase.userDetailDao()
+                        .getOneUserRecord(etEmail.text.toString(), etPassword.text.toString())
                     if (record.isNotEmpty()) {
+
                         storeLoginDetails(record)
                         val intent = Intent(applicationContext, HomeActivity::class.java)
                         startActivity(intent)
@@ -52,14 +53,15 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+
     private fun storeLoginDetails(record: List<UserDetails>) {
-            val shredPref = this.getSharedPreferences(sharedPrefFile,Context.MODE_PRIVATE)
+        val shredPref = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         with(shredPref.edit()) {
             val userRecord = record[0]
-            putLong("uid",userRecord.userId)
-            putString("name",userRecord.user_name)
-            putString("email",userRecord.user_email)
-            putBoolean("isLogin",true)
+            putLong("uid", userRecord.userId)
+            putString("name", userRecord.user_name)
+            putString("email", userRecord.user_email)
+            putBoolean("isLogin", true)
             apply()
         }
 

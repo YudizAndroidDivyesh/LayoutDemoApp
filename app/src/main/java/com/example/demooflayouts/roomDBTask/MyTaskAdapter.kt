@@ -8,26 +8,48 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demooflayouts.R
 
-class MyTaskAdapter(private val taskList : List<TaskDetails>) : RecyclerView.Adapter<MyTaskAdapter.ViewHolder>() {
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+class MyTaskAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<MyTaskAdapter.ViewHolder>() {
+    private var taskList = emptyList<TaskDetails>()
+
+    class ViewHolder(
+        itemView: View, onItemClickListener: OnItemClickListener, taskList: List<TaskDetails>
+    ) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bind(position: Int, holder: ViewHolder, taskList: List<TaskDetails>) {
             val taskData = taskList[position]
-            holder.etTitle.text = "$position + ${taskData.taskTitle}"
+            holder.etTitle.text = taskData.taskTitle
             holder.etDesc.text = taskData.taskDesc
+        }
+
+        init {
+            itemView.setOnClickListener {
+                onItemClickListener.onClick(adapterPosition, taskList)
+            }
         }
 
         private val etTitle = itemView.findViewById<TextView>(R.id.tv_task_title)
         private val etDesc = itemView.findViewById<TextView>(R.id.tv_task_desc)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-       ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rv_user_task_data,parent,false))
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.rv_user_task_data, parent, false)
+        return ViewHolder(view, onItemClickListener, taskList)
+    }
 
     override fun getItemCount() = taskList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position,holder,taskList)
+        holder.bind(position, holder, taskList)
+    }
+
+    fun setData(task: List<TaskDetails>) {
+        this.taskList = task
+        notifyDataSetChanged()
+    }
+
+    interface OnItemClickListener {
+        fun onClick(position: Int, taskList: List<TaskDetails>)
     }
 }
