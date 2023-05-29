@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.demooflayouts.jsonParsing.JsonAndGsonActivity
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
 import com.example.demooflayouts.roomDBTask.SplashScreenActivity
 import com.example.demooflayouts.workManager.DownloadFileActivity
@@ -32,6 +33,7 @@ class AllTaskList : AppCompatActivity() {
         val task16 = findViewById<Button>(R.id.btn_animation)
         val task17 = findViewById<Button>(R.id.btn_thread)
         val task18 = findViewById<Button>(R.id.btn_room_db)
+        val task19 = findViewById<Button>(R.id.btn_json)
 
 
         task1.setOnClickListener {
@@ -86,6 +88,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task18.setOnClickListener {
             startActivity(Intent(applicationContext, SplashScreenActivity::class.java))
+        }
+        task19.setOnClickListener {
+            startActivity(Intent(applicationContext, JsonAndGsonActivity::class.java))
         }
     }
 }
