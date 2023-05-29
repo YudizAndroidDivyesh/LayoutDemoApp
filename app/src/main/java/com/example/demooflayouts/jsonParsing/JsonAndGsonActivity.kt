@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.demooflayouts.R
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -23,22 +25,47 @@ class JsonAndGsonActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_json_data).setOnClickListener {
             coreJsonData()
         }
+        findViewById<Button>(R.id.btn_gson).setOnClickListener {
+            gsonData()
+        }
+    }
+
+    private fun gsonData() {
+        val gson = Gson()
+
+        //Serialized jsonString to Data
+        val userPost = gson.fromJson(jsonString,UserPost::class.java)
+        println("Serialized jsonString to Data : $userPost")
+
+        //DeSerialized Data to JsonString
+        val deSerial = gson.toJson(userPost)
+        println("DeSerialized Data to JsonString : $deSerial")
+
+        val gsonBuilder = GsonBuilder().
+            excludeFieldsWithoutExposeAnnotation().
+            create()
+        //Expose Serialized jsonString to Data
+        val buildUserPost = gsonBuilder.fromJson(jsonString,UserPost::class.java)
+        println("Expose Serialized jsonString to Data : $buildUserPost")
+
+        val deBuildUserPost = gsonBuilder.toJson(buildUserPost)
+        println("Expose Serialized jsonString to Data : $deBuildUserPost")
+
     }
 
     private fun coreJsonData() {
-
-        println(jsonObject.toString())
-
         val id = jsonObject.getInt("id")
         val title = jsonObject.getString("title")
         val body = jsonObject.getString("body")
         val userId = jsonObject.getInt("userId")
-        val tags = jsonObject.getJSONArray("tags")
+       // val tags = jsonObject.getJSONArray("tags")
         val reactions = jsonObject.getInt("reactions")
         val geoLat = jsonObject.getJSONObject("geo").getDouble("lat")
         val geoLng = jsonObject.getJSONObject("geo").getDouble("lng")
 
-        val post  = Post(id,title,body,userId,tags,reactions,Geo(geoLat,geoLng))
+      //  println(jsonObject.toString())
+
+        val post  = Post(id,title,body,userId,reactions,Geo(geoLat,geoLng))
         println(post.toString())
     }
 }
