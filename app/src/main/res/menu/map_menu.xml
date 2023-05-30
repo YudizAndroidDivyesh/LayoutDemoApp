@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/map_type" android:title="@string/map_type">
+        <menu>
+            <item android:id="@+id/satellite_map"
+                android:title="@string/satellite_map"
+                />
+            <item android:id="@+id/ROADMAP_map"
+                android:title="@string/roadmap_map"
+                />
+            <item android:id="@+id/hybrid_map"
+                android:title="@string/hybrid_map"
+                />
+            <item android:id="@+id/terrain_map"
+                android:title="@string/terrain_map"
+                />
+        </menu>
+    </item>
+
+    <item android:id="@+id/map_settings" android:title="@string/settings">
+        <menu>
+            <item android:id="@+id/current_pointer_map"
+                android:title="@string/hide_pointer"
+                />
+            <item android:id="@+id/current_btn_map"
+                android:title="@string/hide_current_btn"
+                />
+            <item android:id="@+id/zoom_btn_map"
+                android:title="@string/hide_zoom_btn"
+                />
+        </menu>
+    </item>
+
+
+
+</menu>

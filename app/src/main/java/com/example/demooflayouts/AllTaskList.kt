@@ -15,6 +15,7 @@ class AllTaskList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_task_list)
 
+        val map = findViewById<Button>(R.id.btn_map)
         val task1 = findViewById<Button>(R.id.layout1)
         val task2 = findViewById<Button>(R.id.view1)
         val task3 = findViewById<Button>(R.id.btn_custom)
@@ -36,6 +37,9 @@ class AllTaskList : AppCompatActivity() {
         val task19 = findViewById<Button>(R.id.btn_json)
 
 
+        map.setOnClickListener {
+            startActivity(Intent(applicationContext,MapsActivity::class.java))
+        }
         task1.setOnClickListener {
             startActivity(Intent(applicationContext,MainActivity::class.java))
         }
