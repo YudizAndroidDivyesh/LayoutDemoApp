@@ -6,7 +6,7 @@
             <item android:id="@+id/satellite_map"
                 android:title="@string/satellite_map"
                 />
-            <item android:id="@+id/ROADMAP_map"
+            <item android:id="@+id/roadmap_map"
                 android:title="@string/roadmap_map"
                 />
             <item android:id="@+id/hybrid_map"
@@ -18,17 +18,18 @@
         </menu>
     </item>
 
+
     <item android:id="@+id/map_settings" android:title="@string/settings">
         <menu>
+            <group android:checkableBehavior="all">
             <item android:id="@+id/current_pointer_map"
-                android:title="@string/hide_pointer"
-                />
+                android:title="@string/hide_pointer" />
             <item android:id="@+id/current_btn_map"
-                android:title="@string/hide_current_btn"
-                />
+                android:title="@string/hide_current_btn" />
             <item android:id="@+id/zoom_btn_map"
-                android:title="@string/hide_zoom_btn"
-                />
+                android:title="@string/hide_zoom_btn" />
+
+            </group>
         </menu>
     </item>
 

@@ -64,4 +64,9 @@
     <string name="hide_zoom_btn">Hide zoom Button</string>
 
 
+    <string name="on">Gps On</string>
+    <string name="off">Gps off</string>
+    <string name="get_location">Get Location</string>
+    <string name="change_style">changeStyle</string>
+
 </resources>
