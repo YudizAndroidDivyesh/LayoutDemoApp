@@ -1,9 +1,11 @@
 package com.example.demooflayouts.jsonParsing
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.demooflayouts.R
+import com.example.demooflayouts.retrofitTask.ProductListActivity
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.json.JSONArray
@@ -27,6 +29,10 @@ class JsonAndGsonActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.btn_gson).setOnClickListener {
             gsonData()
+        }
+        findViewById<Button>(R.id.retrofit_btn).setOnClickListener {
+            val intent = Intent(this,ProductListActivity::class.java)
+            startActivity(intent)
         }
     }
 

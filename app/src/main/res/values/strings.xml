@@ -59,7 +59,7 @@
     <string name="hybrid_map">HYBRID Map</string>
     <string name="terrain_map">TERRAIN Map</string>
     <string name="settings">Settings</string>
-    <string name="hide_pointer">Hide current location pointer</string>
+    <string name="hide_pointer">Hide location pointer</string>
     <string name="hide_current_btn">hide current Button</string>
     <string name="hide_zoom_btn">Hide zoom Button</string>
 
