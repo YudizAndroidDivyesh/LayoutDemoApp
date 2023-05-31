@@ -68,5 +68,8 @@
     <string name="off">Gps off</string>
     <string name="get_location">Get Location</string>
     <string name="change_style">changeStyle</string>
+    <string name="normal_json">Normal Json</string>
+    <string name="gson_library">Gson Library</string>
+    <string name="retrofit_product_list">Retrofit Product List</string>
 
 </resources>

@@ -9,14 +9,16 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-
-<!--    The Fine location provides better and accurate locations. Requires permission,
-It gives permission for using both GPS_PROVIDER and NETWORK_PROVIDER or  GPS_PROVIDER only for determining the position.-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-<!--    The Coarse location provides less accurate locations. Requires permission,
-It gives permission for using both NETWORK_PROVIDER only for determining the position.-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--
+    The Fine location provides better and accurate locations. Requires permission,
+It gives permission for using both GPS_PROVIDER and NETWORK_PROVIDER or  GPS_PROVIDER only for determining the position.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--
+    The Coarse location provides less accurate locations. Requires permission,
+It gives permission for using both NETWORK_PROVIDER only for determining the position.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".broadCastReceiver.MyApp"
@@ -28,7 +30,12 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
-
+        <activity
+            android:name=".retrofitTask.DetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".retrofitTask.ProductListActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

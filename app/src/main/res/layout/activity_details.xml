@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".retrofitTask.DetailsActivity">
+
+    <TextView
+        android:id="@+id/product_detail_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_blue"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/description_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/price_tv"
+        app:layout_constraintEnd_toEndOf="@+id/product_detail_title_tv"
+        app:layout_constraintStart_toStartOf="@+id/product_detail_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/product_detail_title_tv"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/discountPercentage_tv_tv"
+        app:layout_constraintEnd_toEndOf="@+id/description_tv"
+        app:layout_constraintStart_toStartOf="@+id/description_tv"
+        app:layout_constraintTop_toBottomOf="@+id/description_tv" />
+
+    <TextView
+        android:id="@+id/discountPercentage_tv_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/brand_tv"
+        app:layout_constraintEnd_toEndOf="@+id/price_tv"
+        app:layout_constraintStart_toStartOf="@+id/price_tv"
+        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
+
+    <TextView
+        android:id="@+id/stock_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/brand_tv"
+        app:layout_constraintStart_toStartOf="@+id/brand_tv"
+        app:layout_constraintTop_toBottomOf="@+id/brand_tv" />
+
+    <TextView
+        android:id="@+id/brand_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/stock_tv"
+        app:layout_constraintEnd_toEndOf="@+id/discountPercentage_tv_tv"
+        app:layout_constraintStart_toStartOf="@+id/discountPercentage_tv_tv"
+        app:layout_constraintTop_toBottomOf="@+id/discountPercentage_tv_tv" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/products_iv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stock_tv" />
+</androidx.constraintlayout.widget.ConstraintLayout>
