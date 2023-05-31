@@ -4,34 +4,37 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import java.util.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var locationManager : LocationManager
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private lateinit var getLocationBtn : Button
+    private lateinit var marker : Marker
+    private lateinit var geocoder : Geocoder
+    private lateinit var location : Location
+    private val permissionId = 6
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -42,6 +45,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
 
         findViewById<Button>(R.id.style_btn).setOnClickListener {
@@ -62,52 +66,102 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isZoomGesturesEnabled = true
-       getCurrentUserLocation()
-        getUserLocation()
 
+       getCurrentUserLocation()
+        //On Map Click
+        mMap.setOnMapClickListener(this)
     }
 
     private fun getCurrentUserLocation() {
+        if(checkPermissions()){
+            if(isLocationEnabled()){
+                mFusedLocationClient.lastLocation.addOnCompleteListener(this){
+                    task-> location = task.result
+                    if(location != null){
+                       geocoder = Geocoder(this, Locale.getDefault())
+
+                       // Get current Address
+                        val list : List<Address>? = geocoder.getFromLocation(location.latitude,
+                                location.longitude,1)
+                      // Using Address Class get Address
+                        val address : Address? = list?.get(0)
+
+                        //Create Marker
+                       val markerOption =  MarkerOptions().position(
+                            LatLng(location.latitude,
+                                location.longitude)
+                        ).title(address?.getAddressLine(0))
+                        marker = mMap.addMarker(markerOption)!!
+
+                        // Move Camera on Current location
+                        mMap.animateCamera(CameraUpdateFactory.
+                        newLatLngZoom(LatLng(location.latitude,
+                            location.longitude),11f))
+                    }else{
+                        Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }else{
+                Toast.makeText(this, "Please turn on Location", Toast.LENGTH_SHORT).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        }else{
+            requestPermissions()
+        }
+    }
+    override fun onMapClick(latlng: LatLng) {
+        marker.remove()
+        val geocoder = Geocoder(this)
+        val address : List<Address> = geocoder.getFromLocation(latlng.latitude,latlng.longitude,1) as List<Address>
+        // Using Address Class get Address
+       marker = mMap.addMarker(MarkerOptions().position(latlng).title(address[0].getAddressLine(0)))!!
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng,10f))
+    }
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+    private fun checkPermissions(): Boolean {
         if (ActivityCompat.checkSelfPermission(
                 this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-            return
+            mMap.isMyLocationEnabled = true
+            return true
         }
-
-
+        mMap.isMyLocationEnabled = false
+        return false
     }
-
-    private fun getUserLocation() {
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-        val locationLister = LocationListener { location ->
-            val latitude = location.latitude
-            val longitude = location.longitude
-        val    latLng = LatLng(latitude,longitude)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-            mMap.addMarker(
-                MarkerOptions()
-                    .position(latLng)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-            )
-        }
-
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationLister)
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            permissionId
+        )
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<out String>,
+        permissions: Array<String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (permissions.isEmpty()){
-            getCurrentUserLocation()
+        if (requestCode == permissionId) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLocation()
+            }
         }
     }
 
@@ -124,14 +178,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             R.id.hybrid_map -> {mMap.mapType = GoogleMap.MAP_TYPE_HYBRID}
             R.id.terrain_map -> {mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN}
             R.id.current_btn_map -> {
-                Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show()            }
-            R.id.current_pointer_map -> {
                 if(item.isChecked){
-                    mMap.uiSettings.isMyLocationButtonEnabled = false
-                    item.isChecked = false
+                    mMap.uiSettings.isMyLocationButtonEnabled = item.isChecked
+
                 }else{
-                    mMap.uiSettings.isZoomControlsEnabled = false
-                    item.isChecked = true
+                    mMap.uiSettings.isMyLocationButtonEnabled = !item.isChecked
+
+                }
+            }
+            R.id.current_pointer_map -> {
+                if (item.isChecked){
+                    getCurrentUserLocation()
+                }else{
+                    marker.remove()
                 }
             }
             R.id.zoom_btn_map -> {
@@ -148,4 +207,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return super.onOptionsItemSelected(item)
 
     }
+
 }
