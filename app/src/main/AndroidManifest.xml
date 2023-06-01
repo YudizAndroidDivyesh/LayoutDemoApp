@@ -30,12 +30,16 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
+        <activity
+            android:name=".WeatherActivity"
+            android:exported="false" />
 
-        <service android:name=".fcmTask.PushNotification" android:exported="false">
+        <service
+            android:name=".fcmTask.PushNotification"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-
         </service>
 
         <activity
