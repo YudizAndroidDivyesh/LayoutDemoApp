@@ -136,10 +136,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            mMap.isMyLocationEnabled = true
             return true
         }
-        mMap.isMyLocationEnabled = false
         return false
     }
     private fun requestPermissions() {
@@ -179,19 +177,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapCli
             R.id.hybrid_map -> {mMap.mapType = GoogleMap.MAP_TYPE_HYBRID}
             R.id.terrain_map -> {mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN}
             R.id.current_btn_map -> {
-                if(item.isChecked){
-                    mMap.uiSettings.isMyLocationButtonEnabled = item.isChecked
-
+                if(item.isChecked) {
+                    mMap.uiSettings.isMyLocationButtonEnabled  = true
+                    item.isChecked = false
                 }else{
-                    mMap.uiSettings.isMyLocationButtonEnabled = !item.isChecked
-
+                    mMap.uiSettings.isMyLocationButtonEnabled  = false
+                    item.isChecked = true
                 }
+
+
+                Toast.makeText(this, item.isChecked.toString(), Toast.LENGTH_SHORT).show()
             }
             R.id.current_pointer_map -> {
                 if (item.isChecked){
                     getCurrentUserLocation()
+                    item.isChecked = false
                 }else{
                     marker.remove()
+                    item.isChecked = true
                 }
             }
             R.id.zoom_btn_map -> {
