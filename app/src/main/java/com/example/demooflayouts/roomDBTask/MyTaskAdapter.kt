@@ -10,13 +10,13 @@ import com.example.demooflayouts.R
 
 class MyTaskAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<MyTaskAdapter.ViewHolder>() {
-    private var taskList = emptyList<TaskDetails>()
+    private var taskList = ArrayList<TaskDetails>()
 
     class ViewHolder(
-        itemView: View, onItemClickListener: OnItemClickListener, taskList: List<TaskDetails>
+        itemView: View, onItemClickListener: OnItemClickListener, taskList: ArrayList<TaskDetails>
     ) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
-        fun bind(position: Int, holder: ViewHolder, taskList: List<TaskDetails>) {
+        fun bind(position: Int, holder: ViewHolder, taskList: ArrayList<TaskDetails>) {
             val taskData = taskList[position]
             holder.etTitle.text = taskData.taskTitle
             holder.etDesc.text = taskData.taskDesc
@@ -44,12 +44,12 @@ class MyTaskAdapter(private val onItemClickListener: OnItemClickListener) :
         holder.bind(position, holder, taskList)
     }
 
-    fun setData(task: List<TaskDetails>) {
+    fun setData(task: ArrayList<TaskDetails>) {
         this.taskList = task
         notifyDataSetChanged()
     }
 
     interface OnItemClickListener {
-        fun onClick(position: Int, taskList: List<TaskDetails>)
+        fun onClick(position: Int, taskList: ArrayList<TaskDetails>)
     }
 }

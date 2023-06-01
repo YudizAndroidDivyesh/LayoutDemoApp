@@ -41,7 +41,8 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
 
         appDatabase.taskDetailDao().getAllTaskRecord(shardPref.getString("email", "").toString())
             .observe(this, Observer { user ->
-                taskAdapter.setData(user)
+
+                taskAdapter.setData(user as ArrayList<TaskDetails>)
             })
         recyclerView.adapter = taskAdapter
         findViewById<Button>(R.id.btn_logout).setOnClickListener {
@@ -127,7 +128,7 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
         }
     }
 
-    override fun onClick(position: Int, taskList: List<TaskDetails>) {
+    override fun onClick(position: Int, taskList: ArrayList<TaskDetails>) {
         val dialog = Dialog(this)
         dialog.apply {
             setContentView(R.layout.custom_alert_task_details)
@@ -144,6 +145,7 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
             val etDesc = dialog.findViewById<EditText>(R.id.et_task_desc)
 
             val taskRecord = taskList[position]
+
             etTitle.setText(taskRecord.taskTitle)
             etDesc.setText(taskRecord.taskDesc)
 
@@ -156,7 +158,9 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
                             etTitle.text.toString(),
                             etDesc.text.toString(),
                             taskRecord.taskId
+
                         )
+
                     }
                     dismiss()
                 }
@@ -165,6 +169,7 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
             deleteData.setOnClickListener {
                 GlobalScope.launch(Dispatchers.IO) {
                     appDatabase.taskDetailDao().deleteTask(taskRecord.taskId)
+                    taskList.removeAt(position)
                 }
                 dismiss()
             }
