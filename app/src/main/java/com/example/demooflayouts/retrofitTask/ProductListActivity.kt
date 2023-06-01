@@ -83,5 +83,4 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
         startActivity(intent)
     }
 
-
 }

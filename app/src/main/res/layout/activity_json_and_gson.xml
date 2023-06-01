@@ -10,7 +10,7 @@
         android:id="@+id/btn_json_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Normal Json"
+        android:text="@string/normal_json"
         app:layout_constraintBottom_toTopOf="@+id/btn_gson"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,10 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="280dp"
-        android:text="Gson Library"
+        android:text="@string/gson_library"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

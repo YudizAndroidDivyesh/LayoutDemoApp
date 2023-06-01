@@ -14,10 +14,12 @@ import org.json.JSONObject
 class JsonAndGsonActivity : AppCompatActivity() {
 
 
-    val jsonString = "{\"id\":1,\"title\":\"His mother had always taught him\",\"body\":\"He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.\",\"userId\":9,\"tags\":[\"history\",\"american\",\"crime\"],\"reactions\":2,\"geo\": {\n" +
-            "      \"lat\": \"-37.3159\",\n" +
-            "      \"lng\": \"81.1496\"\n" +
-            "    }  }"
+//    val jsonString = "{\"id\":1,\"title\":\"His mother had always taught him\",\"body\":\"He never looked down on those who were less fortunate or who had less money than him. But the stupidity of the group of people he was talking to made him change his mind.\",\"userId\":9,\"tags\":[\"history\",\"american\",\"crime\"],\"reactions\":2,\"geo\": {\n" +
+//            "      \"lat\": \"-37.3159\",\n" +
+//            "      \"lng\": \"81.1496\"\n" +
+//            "    }  }"
+
+    val jsonString =  "{\"products\":[{\"id\":1,\"title\":\"iPhone 9\",\"description\":\"An apple mobile which is nothing like apple\",\"price\":549,\"discountPercentage\":12.96,\"rating\":4.69,\"stock\":94,\"brand\":\"Apple\",\"category\":\"smartphones\",\"thumbnail\":\"https://i.dummyjson.com/data/products/1/thumbnail.jpg\",\"images\":[\"https://i.dummyjson.com/data/products/1/1.jpg\",\"https://i.dummyjson.com/data/products/1/2.jpg\",\"https://i.dummyjson.com/data/products/1/3.jpg\",\"https://i.dummyjson.com/data/products/1/4.jpg\",\"https://i.dummyjson.com/data/products/1/thumbnail.jpg\"]}],\"total\":100,\"skip\":0,\"limit\":30}"
 
     val jsonObject = JSONObject(jsonString)
     val jsonArray = JSONArray()
@@ -34,6 +36,12 @@ class JsonAndGsonActivity : AppCompatActivity() {
             val intent = Intent(this,ProductListActivity::class.java)
             startActivity(intent)
         }
+
+        findViewById<Button>(R.id.retrofit_btn).setOnClickListener {
+            val intent = Intent(this,ProductListActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun gsonData() {
@@ -59,19 +67,11 @@ class JsonAndGsonActivity : AppCompatActivity() {
 
     }
 
-    private fun coreJsonData() {
-        val id = jsonObject.getInt("id")
-        val title = jsonObject.getString("title")
-        val body = jsonObject.getString("body")
-        val userId = jsonObject.getInt("userId")
-       // val tags = jsonObject.getJSONArray("tags")
-        val reactions = jsonObject.getInt("reactions")
-        val geoLat = jsonObject.getJSONObject("geo").getDouble("lat")
-        val geoLng = jsonObject.getJSONObject("geo").getDouble("lng")
+    private fun coreJsonData() { //.getJSONObject(0).getString("title")
+        val id = jsonObject.get("products")
+        val total = jsonObject.getInt("total")
 
-      //  println(jsonObject.toString())
-
-        val post  = Post(id,title,body,userId,reactions,Geo(geoLat,geoLng))
-        println(post.toString())
+        val p = Post(arrayListOf(PostProducts(1,"hello","jkdg",12,123.0,45.0,456,"asd","as","dsa")),45,44,45)
+        println(p)
     }
 }
