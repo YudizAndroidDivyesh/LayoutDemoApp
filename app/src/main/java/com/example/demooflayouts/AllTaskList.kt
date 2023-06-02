@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import com.example.demooflayouts.jsonParsing.JsonAndGsonActivity
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
 import com.example.demooflayouts.fcmTask.WeatherActivity
