@@ -158,9 +158,10 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
                             etTitle.text.toString(),
                             etDesc.text.toString(),
                             taskRecord.taskId
-
                         )
-
+                        taskList.set(position,
+                            TaskDetails(taskRecord.taskId, etTitle.text.toString(),etDesc.text.toString(),taskRecord.userEmail)
+                        )
                     }
                     dismiss()
                 }
@@ -170,6 +171,7 @@ class HomeActivity : AppCompatActivity(), MyTaskAdapter.OnItemClickListener {
                 GlobalScope.launch(Dispatchers.IO) {
                     appDatabase.taskDetailDao().deleteTask(taskRecord.taskId)
                     taskList.removeAt(position)
+
                 }
                 dismiss()
             }
