@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import com.example.demooflayouts.jsonParsing.JsonAndGsonActivity
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
+import com.example.demooflayouts.fcmTask.WeatherActivity
+import com.example.demooflayouts.retrofitTask.ProductListActivity
 import com.example.demooflayouts.roomDBTask.SplashScreenActivity
 import com.example.demooflayouts.workManager.DownloadFileActivity
 
@@ -14,6 +17,21 @@ class AllTaskList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_task_list)
+
+       when(intent.getStringExtra("onclick")){
+            "ProductListActivity" -> {
+                startActivity(Intent(applicationContext,ProductListActivity::class.java))
+            }
+           "WeatherActivity" -> {
+               startActivity(Intent(applicationContext,WeatherActivity::class.java))
+           }
+           "MetarialUI" -> {
+               startActivity(Intent(applicationContext,MetarialUI::class.java))
+           }
+           "SaveFileActivity" -> {
+               startActivity(Intent(applicationContext,SaveFileActivity::class.java))
+           }
+       }
 
         val map = findViewById<Button>(R.id.btn_map)
         val task1 = findViewById<Button>(R.id.layout1)

@@ -31,7 +31,7 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
         <activity
-            android:name=".WeatherActivity"
+            android:name=".fcmTask.WeatherActivity"
             android:exported="false" />
 
         <service
@@ -44,10 +44,12 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
 
         <activity
             android:name=".retrofitTask.DetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".retrofitTask.ProductListActivity"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
