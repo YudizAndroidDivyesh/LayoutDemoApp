@@ -1,6 +1,5 @@
 package com.example.demooflayouts.retrofitTask
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -66,13 +65,11 @@ class DetailsActivity : AppCompatActivity() {
 
         //Using viewBinding to find TextView
         binding.productDetailTitleTv.text = body?.title
-        binding.descriptionTv.text = "Description : \n " + body?.description
-        binding.priceTv.text = "Price : $" + body?.price
-        binding.discountPercentageTv.text =
-            "Discount " + body?.discountPercentage
-        binding.stockTv.text = "Stock : " + body?.stock
-        binding.brandTv.text = "Company Name " + body?.brand
-
+        binding.descriptionTv.text = getString(R.string.description,body?.description)
+        binding.priceTv.text = getString(R.string.dollar_sign, body?.price)
+        binding.discountPercentageTv.text = getString(R.string.discount, body?.discountPercentage.toString())
+        binding.stockTv.text = getString(R.string.stock,body?.stock)
+        binding.brandTv.text = getString(R.string.brandName,body?.brand)
 
         viewPagerAdapter = ImgPagerAdapter(this, body!!.images)
         viewPager.adapter = viewPagerAdapter

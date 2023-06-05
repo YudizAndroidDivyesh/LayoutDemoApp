@@ -4,13 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demooflayouts.R
+import com.example.demooflayouts.databinding.ActivityProductListBinding
+import com.example.demooflayouts.databinding.ProductsLayoutBinding
 import com.example.demooflayouts.retrofitTask.repository.ProductServices
 import com.example.demooflayouts.retrofitTask.viewModel.ProductData
 import com.example.demooflayouts.retrofitTask.viewModel.ProductsDetail
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,12 +26,11 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
 
     lateinit var recyclerView: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
-
+    lateinit var binding: ActivityProductListBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_list)
-
-        recyclerView = findViewById(R.id.recyclerProducts)
+        binding = ActivityProductListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(PRODUCT_LIST_URL)
@@ -37,15 +41,15 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
 
 
         fetchProducts(productServices.listOfProduct())
-
     }
 
     private fun fetchProducts(listOfProduct: Call<ProductData>) {
         val call: Call<ProductData> = listOfProduct
         call.enqueue(object : Callback<ProductData> {
             override fun onResponse(call: Call<ProductData>, response: Response<ProductData>) {
-                findViewById<ProgressBar>(R.id.progress_products).visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
+                binding.progressProducts.visibility = View.GONE
+                binding.recyclerProducts.visibility = View.VISIBLE
+
 
                 showProducts(response.body()?.products)
 //                println(response.body()?.products.toString())
@@ -62,9 +66,9 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
         if (productsList != null) {
             productsAdapter = ProductsAdapter(this)
             productsAdapter.setProductData(productsList)
-            recyclerView.adapter = productsAdapter
+            binding.recyclerProducts.adapter = productsAdapter
         } else {
-            Toast.makeText(this, "No Product Available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.no_products, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -78,5 +82,7 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
         intent.putExtra("productId", productList[position].id)
         startActivity(intent)
     }
+
+
 
 }

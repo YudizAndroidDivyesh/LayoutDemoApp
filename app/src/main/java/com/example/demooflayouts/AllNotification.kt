@@ -1,16 +1,19 @@
 package com.example.demooflayouts
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RemoteViews
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -61,6 +64,13 @@ class AllNotification : AppCompatActivity() {
                 priority = NotificationCompat.PRIORITY_DEFAULT
             }
             with(NotificationManagerCompat.from(this)){
+                if (ActivityCompat.checkSelfPermission(
+                        applicationContext,
+                        Manifest.permission.POST_NOTIFICATIONS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    return@setOnClickListener
+                }
                 notify(2,builder.build())
             }
 
@@ -104,7 +114,7 @@ class AllNotification : AppCompatActivity() {
                     setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.carimg))
                     setStyle(NotificationCompat.BigPictureStyle()
                         .bigPicture(BitmapFactory.decodeResource(resources,R.drawable.carimg))
-                        .bigLargeIcon(null))
+                        .bigLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.baseline_settings_24)))
 
                 }
             with(NotificationManagerCompat.from(this)){

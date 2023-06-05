@@ -114,4 +114,10 @@ class AllTaskList : AppCompatActivity() {
             startActivity(Intent(applicationContext, JsonAndGsonActivity::class.java))
         }
     }
+
+}
+
+
+enum class pushNotificationActivity {
+    
 }

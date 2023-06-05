@@ -1,68 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@color/light_black"
-    android:background="@drawable/btnroundshap"
-    android:padding="10dp"
-    android:layout_margin="5dp"
-    android:elevation="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/thumbnail_iv"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/product_title_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="productData"
+            type="com.example.demooflayouts.retrofitTask.viewModel.ProductsDetail" />
+    </data>
 
-    <TextView
-        android:id="@+id/product_title_tv"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="5dp"
+        android:background="@drawable/btnroundshap"
+        android:backgroundTint="@color/light_black"
+        android:elevation="4dp"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/price_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_margin="30dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/product_title_tv"
-        app:layout_constraintStart_toStartOf="@+id/product_title_tv"
-        app:layout_constraintTop_toBottomOf="@+id/product_title_tv" />
+        <ImageView
+            android:id="@+id/thumbnail_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitCenter"
+            app:imgUrl="@{productData.thumbnail}"
+            android:contentDescription="@string/no_products"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/product_title_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/category_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_margin="20dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/price_tv"
-        app:layout_constraintStart_toStartOf="@+id/price_tv"
-        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
+        <TextView
+            android:id="@+id/product_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="@{productData.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip4"
-        style="@style/Widget.MaterialComponents.Chip.Choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/see_details_now"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/category_tv"
-        app:layout_constraintStart_toStartOf="@+id/category_tv"
-        app:layout_constraintTop_toBottomOf="@+id/category_tv" />
+        <TextView
+            android:id="@+id/price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@{productData.price.toString()}"
+            android:layout_margin="30dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/product_title_tv"
+            app:layout_constraintStart_toStartOf="@+id/product_title_tv"
+            app:layout_constraintTop_toBottomOf="@+id/product_title_tv" />
+
+        <TextView
+            android:id="@+id/category_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@{productData.category}"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/price_tv"
+            app:layout_constraintStart_toStartOf="@+id/price_tv"
+            app:layout_constraintTop_toBottomOf="@+id/price_tv" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_details_now"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/category_tv"
+            app:layout_constraintStart_toStartOf="@+id/category_tv"
+            app:layout_constraintTop_toBottomOf="@+id/category_tv" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

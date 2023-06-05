@@ -73,7 +73,12 @@
     <string name="retrofit_product_list">Retrofit Product List</string>
     <string name="see_details_now">See Details Now</string>
 
-    <string name="dollar_sign">$ %d</string>
+    <string name="dollar_sign">Price : $%1$d</string>
+    <string name="no_products">No Product Available</string>
+    <string name="description">Description : %1$s</string>
+    <string name="discount">Discount : %1$s %%</string>
+    <string name="stock">Stock : %1$d</string>
+    <string name="brandName">Company Name : %1$s</string>
 
 
 </resources>
