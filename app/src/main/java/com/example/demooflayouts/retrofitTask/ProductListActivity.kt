@@ -11,8 +11,6 @@ import com.example.demooflayouts.R
 import com.example.demooflayouts.retrofitTask.repository.ProductServices
 import com.example.demooflayouts.retrofitTask.viewModel.ProductData
 import com.example.demooflayouts.retrofitTask.viewModel.ProductsDetail
-import com.example.demooflayouts.roomDBTask.MyTaskAdapter
-import com.example.demooflayouts.roomDBTask.TaskDetails
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,8 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick {
 
-    lateinit var recyclerView : RecyclerView
-    lateinit var productsAdapter: ProductsAdapter
+    lateinit var recyclerView: RecyclerView
+    private lateinit var productsAdapter: ProductsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,26 +28,26 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
 
         recyclerView = findViewById(R.id.recyclerProducts)
 
+        val retrofit = Retrofit.Builder()
+                .baseUrl(PRODUCT_LIST_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+        val productServices = retrofit.create(ProductServices::class.java)
 
 
-        val retrofit =   Retrofit.Builder().baseUrl(PRODUCT_LIST_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ProductServices::class.java)
-
-
-        getProductList(retrofit.listOfProduct())
+        fetchProducts(productServices.listOfProduct())
 
     }
 
-    private fun getProductList(listOfProduct: Call<ProductData>) {
-        val call : Call<ProductData> = listOfProduct
-        call.enqueue(object : Callback<ProductData>{
+    private fun fetchProducts(listOfProduct: Call<ProductData>) {
+        val call: Call<ProductData> = listOfProduct
+        call.enqueue(object : Callback<ProductData> {
             override fun onResponse(call: Call<ProductData>, response: Response<ProductData>) {
                 findViewById<ProgressBar>(R.id.progress_products).visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
 
-                showProduct(response.body()?.products)
+                showProducts(response.body()?.products)
 //                println(response.body()?.products.toString())
             }
 
@@ -60,26 +58,24 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
         })
     }
 
-    private fun showProduct(productsList: ArrayList<ProductsDetail>?) {
-        if(productsList != null){
+    private fun showProducts(productsList: ArrayList<ProductsDetail>?) {
+        if (productsList != null) {
             productsAdapter = ProductsAdapter(this)
             productsAdapter.setProductData(productsList)
             recyclerView.adapter = productsAdapter
-        }else{
+        } else {
             Toast.makeText(this, "No Product Available", Toast.LENGTH_SHORT).show()
         }
     }
 
     companion object {
-        const val PRODUCT_LIST_URL= "https://dummyjson.com/"
+        const val PRODUCT_LIST_URL = "https://dummyjson.com/"
     }
 
     override fun onClick(position: Int, productList: ArrayList<ProductsDetail>) {
 
-        val data = productList[position]
-        val productsDetail = ProductsDetail(data.id,data.title,data.description,data.price,data.discountPercentage,data.rating,data.stock,data.brand,data.category,data.thumbnail,data.images)
-        val intent = Intent(this,DetailsActivity::class.java)
-        intent.putExtra("details",productsDetail)
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra("productId", productList[position].id)
         startActivity(intent)
     }
 

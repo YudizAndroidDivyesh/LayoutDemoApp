@@ -71,5 +71,9 @@
     <string name="normal_json">Normal Json</string>
     <string name="gson_library">Gson Library</string>
     <string name="retrofit_product_list">Retrofit Product List</string>
+    <string name="see_details_now">See Details Now</string>
+
+    <string name="dollar_sign">$ %d</string>
+
 
 </resources>

@@ -25,7 +25,7 @@ class ImgPagerAdapter(val context : Context, private val imgList : ArrayList<Str
         val mLayout = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = mLayout.inflate(R.layout.slider_image,container,false)
         val imgView = view.findViewById<ImageView>(R.id.iv_slider)
-        Picasso.get().load(imgList[position]).into(imgView)
+        Picasso.get().load(imgList[position]).placeholder(R.drawable.baseline_image_24).into(imgView)
         Objects.requireNonNull(container).addView(view)
         return view
     }

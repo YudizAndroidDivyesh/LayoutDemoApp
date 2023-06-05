@@ -1,43 +1,82 @@
 package com.example.demooflayouts.retrofitTask
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import android.view.View
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.example.demooflayouts.R
+import com.example.demooflayouts.databinding.ActivityDetailsBinding
+import com.example.demooflayouts.retrofitTask.repository.ProductServices
 import com.example.demooflayouts.retrofitTask.viewModel.ProductsDetail
-import com.google.android.material.tabs.TabLayout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailsActivity : AppCompatActivity() {
 
-    private lateinit var productData: ProductsDetail
     private lateinit var viewPager: ViewPager
     private lateinit var viewPagerAdapter: ImgPagerAdapter
+
+    private lateinit var binding: ActivityDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewPager = findViewById(R.id.products_iv)
 
-        if (intent.extras != null) {
-            productData = intent.getSerializableExtra("details") as ProductsDetail
-        }
+        val  productId = intent.getIntExtra("productId",0)
 
-        findViewById<TextView>(R.id.product_detail_title_tv).text = productData.title
-        findViewById<TextView>(R.id.description_tv).text =
-            "Description : \n " + productData.description
-        findViewById<TextView>(R.id.price_tv).text = "Price : $" + productData.price.toString()
-        findViewById<TextView>(R.id.discountPercentage_tv_tv).text =
-            "Discount " + productData.discountPercentage.toString() + "%"
-        findViewById<TextView>(R.id.stock_tv).text = "Stock : " + productData.stock.toString()
-        findViewById<TextView>(R.id.brand_tv).text = "Company Name " + productData.brand
+        val retroFit = Retrofit.Builder().baseUrl(ProductListActivity.PRODUCT_LIST_URL).addConverterFactory(GsonConverterFactory.create()).build()
+        val productsDetailServices = retroFit.create(ProductServices::class.java)
 
-        viewPagerAdapter = ImgPagerAdapter(this, productData.images)
+        fetchDataFromUrl(productsDetailServices.getOneProduct(productId))
+    }
+
+    private fun fetchDataFromUrl(oneProductsDetail: Call<ProductsDetail>) {
+        val call : Call<ProductsDetail> = oneProductsDetail
+        call.enqueue(object : Callback<ProductsDetail> {
+            override fun onResponse(
+                call: Call<ProductsDetail>,
+                response: Response<ProductsDetail>
+            ) {
+                println("Connection...")
+                binding.detailsProgress.visibility = View.GONE
+                showProductDetails(response.body())
+            }
+
+            override fun onFailure(call: Call<ProductsDetail>, t: Throwable) {
+             println("Failed....")
+            }
+
+        })
+
+    }
+    private fun showProductDetails(body: ProductsDetail?) {
+//                if (intent.extras != null) {
+//                    productData = intent.getSerializableExtra("details") as ProductsDetail
+//                }
+
+    //    Without viewBinding to find textView
+      //  findViewById<TextView>(R.id.product_detail_title_tv).text = productData.title
+
+        //Using viewBinding to find TextView
+        binding.productDetailTitleTv.text = body?.title
+        binding.descriptionTv.text = "Description : \n " + body?.description
+        binding.priceTv.text = "Price : $" + body?.price
+        binding.discountPercentageTv.text =
+            "Discount " + body?.discountPercentage
+        binding.stockTv.text = "Stock : " + body?.stock
+        binding.brandTv.text = "Company Name " + body?.brand
+
+
+        viewPagerAdapter = ImgPagerAdapter(this, body!!.images)
         viewPager.adapter = viewPagerAdapter
 
-        val a = findViewById<TabLayout>(R.id.indicator)
-        a.setupWithViewPager(viewPager, true)
-
+        binding.indicator.setupWithViewPager(viewPager, true)
     }
 }
