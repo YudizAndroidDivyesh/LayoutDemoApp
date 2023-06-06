@@ -1,6 +1,10 @@
 package com.example.demooflayouts.retrofitTask.viewModel
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.example.demooflayouts.R
 import com.google.gson.annotations.SerializedName
+import com.squareup.picasso.Picasso
 import java.io.Serializable
 
 data class ProductsDetail(
@@ -19,3 +23,4 @@ data class ProductsDetail(
 ) : Serializable {
 
 }
+

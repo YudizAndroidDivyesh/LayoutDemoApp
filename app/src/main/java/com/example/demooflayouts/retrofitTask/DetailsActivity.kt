@@ -3,11 +3,14 @@ package com.example.demooflayouts.retrofitTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.demooflayouts.R
 import com.example.demooflayouts.databinding.ActivityDetailsBinding
 import com.example.demooflayouts.retrofitTask.repository.ProductServices
 import com.example.demooflayouts.retrofitTask.viewModel.ProductsDetail
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,3 +80,4 @@ class DetailsActivity : AppCompatActivity() {
         binding.indicator.setupWithViewPager(viewPager, true)
     }
 }
+

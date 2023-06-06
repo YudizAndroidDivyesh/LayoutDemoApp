@@ -82,7 +82,4 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
         intent.putExtra("productId", productList[position].id)
         startActivity(intent)
     }
-
-
-
 }

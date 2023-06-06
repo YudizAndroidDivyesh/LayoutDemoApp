@@ -55,7 +55,8 @@ class ProductsAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
        // holder.bind(holder, position, productList as ArrayList<ProductsDetail>)
-        holder.view.productData = productList[position]
+         holder.view.productData = productList[position]
+        holder.view.imgUrl = productList[position].thumbnail
     }
 
     fun setProductData(list: ArrayList<ProductsDetail>) {
@@ -65,8 +66,9 @@ class ProductsAdapter(
     interface OnProductClick {
         fun onClick(position: Int, productList: ArrayList<ProductsDetail>)
     }
-    @BindingAdapter("imgUrl")
-    fun ImageView.loadImg(url : String){
-        Picasso.get().load(url).placeholder(R.drawable.baseline_image_24).into(binding.thumbnailIv)
-    }
+
+}
+@BindingAdapter("imgUrl")
+fun ImageView.loadImg(url : String){
+    Picasso.get().load(url).placeholder(R.drawable.baseline_image_24).into(this)
 }
