@@ -22,7 +22,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick {
+class ProductListActivity : AppCompatActivity(){
 
     lateinit var recyclerView: RecyclerView
     private lateinit var productsAdapter: ProductsAdapter
@@ -64,8 +64,12 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
 
     private fun showProducts(productsList: ArrayList<ProductsDetail>?) {
         if (productsList != null) {
-            productsAdapter = ProductsAdapter(this)
-            productsAdapter.setProductData(productsList)
+            productsAdapter = ProductsAdapter(productsList){
+                println(it.id)
+                val intent = Intent(this, DetailsActivity::class.java)
+                intent.putExtra("productId", it.id)
+                startActivity(intent)
+            }
             binding.recyclerProducts.adapter = productsAdapter
         } else {
             Toast.makeText(this, R.string.no_products, Toast.LENGTH_SHORT).show()
@@ -76,10 +80,4 @@ class ProductListActivity : AppCompatActivity(), ProductsAdapter.OnProductClick 
         const val PRODUCT_LIST_URL = "https://dummyjson.com/"
     }
 
-    override fun onClick(position: Int, productList: ArrayList<ProductsDetail>) {
-
-        val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra("productId", productList[position].id)
-        startActivity(intent)
-    }
 }

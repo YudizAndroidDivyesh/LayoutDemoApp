@@ -33,36 +33,75 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/product_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_name_title"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/product_title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/product_title_tv"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:text="@{productData.title}"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/price_tv"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+            app:layout_constraintTop_toBottomOf="@id/product_name_tv" />
+
+        <TextView
+            android:id="@+id/price_sign_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_sign"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/price_tv"
+            app:layout_constraintEnd_toStartOf="@id/price_tv"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+            app:layout_constraintTop_toTopOf="@id/price_tv" />
 
         <TextView
             android:id="@+id/price_tv"
-            android:layout_width="190dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@{productData.price.toString()}"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/category_tv"
+            app:layout_constraintTop_toBottomOf="@id/product_title_tv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_title_tv" />
+            app:layout_constraintStart_toEndOf="@id/price_sign_tv"
+           />
+
+        <TextView
+            android:id="@+id/category_tag_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+            app:layout_constraintTop_toBottomOf="@id/price_tv" />
 
         <TextView
             android:id="@+id/category_tv"
-            android:layout_width="190dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@{productData.category}"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price_tv" />
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+            app:layout_constraintTop_toBottomOf="@id/category_tag_tv" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip4"

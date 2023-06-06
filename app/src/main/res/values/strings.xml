@@ -79,6 +79,9 @@
     <string name="discount">Discount : %1$s %%</string>
     <string name="stock">Stock : %1$d</string>
     <string name="brandName">Company Name : %1$s</string>
+    <string name="price_sign">Price : $</string>
+    <string name="category">Category : </string>
+    <string name="product_name_title">Product : </string>
 
 
 </resources>
