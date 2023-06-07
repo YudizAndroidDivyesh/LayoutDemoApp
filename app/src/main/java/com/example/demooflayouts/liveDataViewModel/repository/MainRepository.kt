@@ -13,7 +13,7 @@ class MainRepository() {
      suspend fun fetchData(topicName : String) : List<Articles>?{
           loading.value = true
 
-               val response = ApiBuilder.createConnection()?.getQueryNews(topicName)
+          val response = ApiBuilder.createConnection()?.getQueryNews(topicName)
           return if(response?.isSuccessful == true){
                response.body()?.articles
           }else{

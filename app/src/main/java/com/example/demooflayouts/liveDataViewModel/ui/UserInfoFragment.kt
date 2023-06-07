@@ -2,6 +2,7 @@ package com.example.demooflayouts.liveDataViewModel.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.demooflayouts.R
 import com.example.demooflayouts.databinding.FragmentUserInfoBinding
+import com.example.demooflayouts.liveDataViewModel.data.Articles
+import com.example.demooflayouts.liveDataViewModel.viewModelFile.NewsAdapter
 import com.example.demooflayouts.liveDataViewModel.viewModelFile.UserModel
 
 class UserInfoFragment : Fragment() {
   lateinit var binding : FragmentUserInfoBinding
-
+  lateinit var newsAdapter : NewsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -42,9 +45,13 @@ class UserInfoFragment : Fragment() {
             binding.phoneTv.text = it.phone
             binding.emailTv.text = it.email
             binding.addressTv.text = it.address
+            Log.e("Topic",it.topic)
             vm.data(it.topic)
 
-            Log.e("Topic",it.topic)
+        })
+        vm.topicList.observe(viewLifecycleOwner, Observer{
+            newsAdapter = NewsAdapter(it)
+            binding.rvTopicNews.adapter = newsAdapter
         })
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="newsData"
+            type="com.example.demooflayouts.liveDataViewModel.data.Articles" />
+        <variable
+            name="newsImg"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/btnroundshap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_margin="10dp"
+        android:elevation="4dp"
+        android:id="@+id/rowLayout">
+
+        <ImageView
+            android:id="@+id/thumbnail_news_iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:newsImgUrl="@{newsImg}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_news_title"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:text="@{newsData.author}"
+            android:textColor="@color/dark_blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_news_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_news_iv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/tv_news_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="20sp"
+            android:text="@{newsData.content}"
+            android:textStyle="bold"
+            tools:text="To retrieve values from a shared preferences file, call methods such as getInt() and getString()"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail_news_iv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
