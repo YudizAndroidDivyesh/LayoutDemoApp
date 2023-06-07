@@ -7,6 +7,7 @@ import android.widget.Button
 import com.example.demooflayouts.jsonParsing.JsonAndGsonActivity
 import com.example.demooflayouts.broadCastReceiver.BroadCastPercentageActivity
 import com.example.demooflayouts.fcmTask.WeatherActivity
+import com.example.demooflayouts.liveDataViewModel.ui.PersonInfoAndNewsActivity
 import com.example.demooflayouts.retrofitTask.ProductListActivity
 import com.example.demooflayouts.roomDBTask.SplashScreenActivity
 import com.example.demooflayouts.workManager.DownloadFileActivity
@@ -52,6 +53,7 @@ class AllTaskList : AppCompatActivity() {
         val task17 = findViewById<Button>(R.id.btn_thread)
         val task18 = findViewById<Button>(R.id.btn_room_db)
         val task19 = findViewById<Button>(R.id.btn_json)
+        val task22 = findViewById<Button>(R.id.btn_livedata)
 
 
         map.setOnClickListener {
@@ -112,6 +114,9 @@ class AllTaskList : AppCompatActivity() {
         }
         task19.setOnClickListener {
             startActivity(Intent(applicationContext, JsonAndGsonActivity::class.java))
+        }
+        task22.setOnClickListener {
+            startActivity(Intent(applicationContext, PersonInfoAndNewsActivity::class.java))
         }
     }
 

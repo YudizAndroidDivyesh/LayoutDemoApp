@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        tools:context=".liveDataViewModel.ui.UserInfoFragment">
+
+        <TextView
+            android:id="@+id/user_title_tv_frg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/userinfo"
+            android:textAlignment="center"
+            android:layout_margin="20dp"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            style="@style/CustomTextView"
+            app:layout_constraintStart_toStartOf="@id/user_title_tv_frg"
+            app:layout_constraintEnd_toEndOf="@id/user_title_tv_frg"
+            app:layout_constraintTop_toBottomOf="@id/user_title_tv_frg" />
+
+        <TextView
+            android:id="@+id/phone_tv"
+            style="@style/CustomTextView"
+            app:layout_constraintStart_toStartOf="@id/user_title_tv_frg"
+            app:layout_constraintEnd_toEndOf="@id/user_title_tv_frg"
+            app:layout_constraintTop_toBottomOf="@id/name_tv" />
+
+        <TextView
+            android:id="@+id/email_tv"
+            style="@style/CustomTextView"
+            app:layout_constraintStart_toStartOf="@id/user_title_tv_frg"
+            app:layout_constraintEnd_toEndOf="@id/user_title_tv_frg"
+            app:layout_constraintTop_toBottomOf="@id/phone_tv" />
+
+        <TextView
+            android:id="@+id/address_tv"
+            style="@style/CustomTextView"
+            android:lines="2"
+            app:layout_constraintStart_toStartOf="@id/user_title_tv_frg"
+            app:layout_constraintEnd_toEndOf="@id/user_title_tv_frg"
+            app:layout_constraintTop_toBottomOf="@id/email_tv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_topic_news"
+            android:layout_width="0dp"
+            android:layout_height="360dp"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/rv_user_task_data"
+            app:layout_constraintStart_toStartOf="@id/address_tv"
+            app:layout_constraintEnd_toEndOf="@id/address_tv"
+            app:layout_constraintTop_toBottomOf="@id/address_tv" />
+
+        <Button
+            android:id="@+id/edit_info_btn"
+            style="@style/CustomButtonStyle"
+            android:text="@string/edit"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/rv_topic_news"
+            app:layout_constraintEnd_toEndOf="@id/rv_topic_news"
+            app:layout_constraintTop_toBottomOf="@id/rv_topic_news" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

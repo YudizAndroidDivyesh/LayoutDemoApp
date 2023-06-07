@@ -82,6 +82,11 @@
     <string name="price_sign">Price : $</string>
     <string name="category">Category : </string>
     <string name="product_name_title">Product : </string>
+    <string name="address">Address</string>
+    <string name="enter_any_topic">Enter Any Topic</string>
+    <string name="save">save</string>
+    <string name="userinfo">UserInfo</string>
+    <string name="edit">Edit</string>
 
 
 </resources>
