@@ -21,7 +21,7 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".koinDI.KoinModule"
+        android:name=".KoinModule"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

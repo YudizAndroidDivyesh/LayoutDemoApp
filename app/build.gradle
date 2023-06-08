@@ -79,9 +79,11 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
-    //Koin
+    //Koin - Dependencies injection
     implementation "io.insert-koin:koin-android:3.4.2"
     implementation "io.insert-koin:koin-core:3.4.2"
 
+    // viewModel DI
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
 }

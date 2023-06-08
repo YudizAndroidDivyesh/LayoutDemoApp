@@ -1,10 +1,11 @@
-package com.example.demooflayouts.koinDI
+package com.example.demooflayouts
 
 import android.app.Application
+import com.example.demooflayouts.koinDI.appModule
+import com.example.demooflayouts.koinDI.data
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
 
 class KoinModule :Application(){
     override fun onCreate() {
@@ -13,9 +14,7 @@ class KoinModule :Application(){
         startKoin{
             androidLogger()
             androidContext(this@KoinModule)
-            module{
-
-            }
+            modules(appModule, data)
         }
     }
 }
