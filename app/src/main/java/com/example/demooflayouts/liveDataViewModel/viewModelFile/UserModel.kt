@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.demooflayouts.liveDataViewModel.data.Articles
 import com.example.demooflayouts.liveDataViewModel.data.UserInfo
 import com.example.demooflayouts.liveDataViewModel.repository.MainRepository
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class UserModel(private val repository: MainRepository= MainRepository()) : ViewModel() {
@@ -18,12 +19,20 @@ class UserModel(private val repository: MainRepository= MainRepository()) : View
         _userDetail.value = data
     }
 
-    private val _topicData = MutableLiveData<List<Articles>>()
-    val topicList = _topicData
-
+//    private val _topicData = MutableLiveData<List<Articles>>()
+//    val topicList = _topicData
+//
+//    fun data(topicName : String){
+//        viewModelScope.launch {
+//             _topicData.value = repository.fetchData(topicName)
+//        }
+//    }
+    private val _topicDataFlow = MutableSharedFlow<List<Articles>?>()
+    val topicFlow = _topicDataFlow
     fun data(topicName : String){
         viewModelScope.launch {
-             _topicData.value = repository.fetchData(topicName)
+            _topicDataFlow.emit(repository.fetchData(topicName))
         }
     }
+
 }

@@ -10,15 +10,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.demooflayouts.R
 import com.example.demooflayouts.databinding.FragmentUserInfoBinding
 import com.example.demooflayouts.liveDataViewModel.data.Articles
 import com.example.demooflayouts.liveDataViewModel.viewModelFile.NewsAdapter
 import com.example.demooflayouts.liveDataViewModel.viewModelFile.UserModel
+import kotlinx.coroutines.launch
 
 class UserInfoFragment : Fragment() {
-  lateinit var binding : FragmentUserInfoBinding
-  lateinit var newsAdapter : NewsAdapter
+    lateinit var binding: FragmentUserInfoBinding
+    lateinit var newsAdapter: NewsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -28,12 +30,13 @@ class UserInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-       binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_user_info, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_info, container, false)
 
         userData()
 
         binding.editInfoBtn.setOnClickListener {
-         activity?.supportFragmentManager!!.beginTransaction().replace(R.id.userInfoFrm,AddDataFragment()).commit()
+            activity?.supportFragmentManager!!.beginTransaction()
+                .replace(R.id.userInfoFrm, AddDataFragment()).commit()
         }
         return binding.root
     }
@@ -45,13 +48,19 @@ class UserInfoFragment : Fragment() {
             binding.phoneTv.text = it.phone
             binding.emailTv.text = it.email
             binding.addressTv.text = it.address
-            Log.e("Topic",it.topic)
+            Log.e("Topic", it.topic)
             vm.data(it.topic)
 
         })
-        vm.topicList.observe(viewLifecycleOwner, Observer{
-            newsAdapter = NewsAdapter(it)
-            binding.rvTopicNews.adapter = newsAdapter
-        })
+        lifecycleScope.launch {
+            try {
+                vm.topicFlow.collect {
+                    newsAdapter = NewsAdapter(it!!)
+                    binding.rvTopicNews.adapter = newsAdapter
+                }
+            } catch (e: Exception) {
+                d("exception ", e.toString())
+            }
+        }
     }
 }

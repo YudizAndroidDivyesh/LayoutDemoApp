@@ -28,7 +28,7 @@ class ImgFragment : Fragment(),FragmentCommunicater{
     ): View? {
         // Inflate the layout for this fragment
         val transaction = inflater.inflate(R.layout.fragment_img, container, false)
-        var data = activity as FragmentCommunicater
+    //    var data = activity
 
         val nextPageBtn  = transaction.findViewById<Button>(R.id.nextFragmentBtn)
         val frgTitle = transaction.findViewById<TextView>(R.id.fragmentTitle)
@@ -38,9 +38,9 @@ class ImgFragment : Fragment(),FragmentCommunicater{
         frgTitle.text = arguments?.getString("message")
 
         val popMsg = transaction.findViewById<Button>(R.id.toastFragment)
-        popMsg.setOnClickListener {
-                data.passData("Message")
-        }
+//        popMsg.setOnClickListener {
+//                data.passData("Message")
+//        }
         return transaction
     }
 
