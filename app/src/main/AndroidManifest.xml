@@ -21,7 +21,7 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".broadCastReceiver.MyApp"
+        android:name=".koinDI.KoinModule"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -31,10 +31,12 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
         android:theme="@style/Theme.DemoOfLayouts"
         tools:targetApi="31">
         <activity
+            android:name=".koinDI.UserKoinActivity"
+            android:exported="false" />
+        <activity
             android:name=".liveDataViewModel.ui.PersonInfoAndNewsActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".fcmTask.WeatherActivity"
             android:exported="false" />
@@ -49,12 +51,10 @@ It gives permission for using both NETWORK_PROVIDER only for determining the pos
 
         <activity
             android:name=".retrofitTask.DetailsActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".retrofitTask.ProductListActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

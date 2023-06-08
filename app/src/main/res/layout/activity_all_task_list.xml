@@ -142,6 +142,12 @@
             android:layout_height="wrap_content"
             android:text="22.LiveData and ViewModel" />
 
+        <Button
+            android:id="@+id/btn_koin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23.DI With koin" />
+
     </LinearLayout>
     </ScrollView>
 

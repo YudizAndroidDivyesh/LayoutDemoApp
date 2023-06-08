@@ -1,6 +1,9 @@
 package com.example.demooflayouts.liveDataViewModel.util
 
 import com.example.demooflayouts.liveDataViewModel.api.NewsServices
+import okhttp3.internal.Util
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent.inject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -8,6 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiBuilder {
     companion object{
         private const val BASE_URL = "https://newsapi.org/v2/"
+
+
 
         private var newsServices : NewsServices? = null
         fun createConnection(): NewsServices? {
